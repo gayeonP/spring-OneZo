@@ -3,8 +3,8 @@ package org.kakao.kakaoshopping.web.dto.order.request;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.kakao.kakaoshopping.domain.entity.Order;
-import org.kakao.kakaoshopping.domain.entity.OrderItem;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
+import org.kakao.kakaoshopping.domain.entity.order.OrderItem;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

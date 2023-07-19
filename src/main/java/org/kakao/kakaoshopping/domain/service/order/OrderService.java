@@ -2,7 +2,7 @@ package org.kakao.kakaoshopping.domain.service.order;
 
 import static java.util.Locale.*;
 
-import org.kakao.kakaoshopping.domain.entity.Order;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.repository.order.OrderRepository;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
 import org.kakao.kakaoshopping.web.exception.OrderNotFound;

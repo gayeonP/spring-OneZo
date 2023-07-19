@@ -2,7 +2,7 @@ package org.kakao.kakaoshopping.web.controller.order;
 
 import java.util.List;
 
-import org.kakao.kakaoshopping.domain.entity.Order;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
 import org.kakao.kakaoshopping.web.annotaion.LoginMember;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;

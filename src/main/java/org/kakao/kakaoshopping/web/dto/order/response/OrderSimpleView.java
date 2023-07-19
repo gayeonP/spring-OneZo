@@ -3,7 +3,7 @@ package org.kakao.kakaoshopping.web.dto.order.response;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kakao.kakaoshopping.domain.entity.Order;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class OrderSimpleView {
 
 	public OrderSimpleView(Order order) {
 		this.id = order.getId();
-		this.memberId = order.getMemberId();
+		this.memberId = order.getUser().getId();
 		this.orderItems = order.getOrderItems().stream()
 			.map(OrderItemSimpleView::new)
 			.toList();

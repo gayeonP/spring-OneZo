@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.kakao.kakaoshopping.domain.entity.Order;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.repository.order.OrderRepository;
 import org.kakao.kakaoshopping.web.dto.order.request.CreateOrder;
 import org.kakao.kakaoshopping.web.dto.order.request.CreateOrderItem;
