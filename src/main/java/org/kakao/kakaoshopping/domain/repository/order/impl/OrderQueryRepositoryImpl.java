@@ -1,12 +1,11 @@
 package org.kakao.kakaoshopping.domain.repository.order.impl;
 
-import static org.kakao.kakaoshopping.domain.entity.QOrder.*;
-import static org.kakao.kakaoshopping.domain.entity.QOrderItem.*;
-import static org.kakao.kakaoshopping.utils.CommonUtils.*;
+import static org.kakao.kakaoshopping.domain.entity.order.QOrder.*;
+import static org.kakao.kakaoshopping.domain.entity.order.QOrderItem.*;
 
 import java.util.List;
 
-import org.kakao.kakaoshopping.domain.entity.Order;
+import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.repository.order.OrderQueryRepository;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
 import org.springframework.data.domain.Page;
@@ -54,6 +53,7 @@ public class OrderQueryRepositoryImpl implements OrderQueryRepository {
 
 	private BooleanBuilder memberEq(Long memberId) {
 		// todo 추후 Member 엔티티를 매핑하도록 수정해야 함
-		return nullSafeBuilder(() -> order.memberId.eq(memberId));
+		return null;
+		//return nullSafeBuilder(() -> order.memberId.eq(memberId));
 	}
 }

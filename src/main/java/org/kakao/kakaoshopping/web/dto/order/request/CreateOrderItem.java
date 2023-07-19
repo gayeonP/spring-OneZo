@@ -1,6 +1,6 @@
 package org.kakao.kakaoshopping.web.dto.order.request;
 
-import org.kakao.kakaoshopping.domain.entity.OrderItem;
+import org.kakao.kakaoshopping.domain.entity.order.OrderItem;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,6 @@ public class CreateOrderItem {
 
 	public OrderItem toEntity() {
 		return OrderItem.builder()
-			.itemId(itemId)
 			.quantity(quantity)
 			.build();
 	}
