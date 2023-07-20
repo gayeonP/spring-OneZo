@@ -1,6 +1,7 @@
 package org.kakao.kakaoshopping.domain.entity.item;
 
 import org.kakao.kakaoshopping.domain.entity.BaseEntity;
+import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,5 +37,14 @@ public class Item extends BaseEntity {
 	private String imagePath;
 
 	@Column(columnDefinition = "TEXT DEFAULT ''", nullable = false)
-	private String imageDetail;
+	private String itemDetail;
+
+	@Builder
+	public Item(String name, Integer price, Integer stock, String imagePath, String itemDetail) {
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.imagePath = imagePath;
+		this.itemDetail = itemDetail;
+	}
 }
