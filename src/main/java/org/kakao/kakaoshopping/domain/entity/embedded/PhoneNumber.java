@@ -16,4 +16,8 @@ public class PhoneNumber {
 
 	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
 	private String tailNumber;
+
+	public String toStringPhone() {
+		return headNumber + " - " + middleNumber + " - " + tailNumber;
+	}
 }

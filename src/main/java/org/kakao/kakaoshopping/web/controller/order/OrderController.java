@@ -36,7 +36,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/order")
-	public String findOrder(@LoginMember LoggedInMember loggedInMember, Long orderId, Model model) {
+	public String findOrder(Long orderId, Model model) {
 		Order order = orderService.findOrder(orderId);
 
 		model.addAttribute("order", new OrderSimpleView(order));
