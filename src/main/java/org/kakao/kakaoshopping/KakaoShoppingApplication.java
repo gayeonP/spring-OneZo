@@ -9,9 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @ConfigurationPropertiesScan
 public class KakaoShoppingApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(KakaoShoppingApplication.class, args);
 	}
-
 }

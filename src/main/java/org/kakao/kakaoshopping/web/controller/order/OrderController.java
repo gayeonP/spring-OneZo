@@ -36,7 +36,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/order")
-	public String findOrder(@LoginMember LoggedInMember loggedInMember, Long orderId, Model model) {
+	public String findOrder(Long orderId, Model model) {
 		Order order = orderService.findOrder(orderId);
 
 		model.addAttribute("order", new OrderSimpleView(order));
@@ -67,8 +67,8 @@ public class OrderController {
 	}
 
 	@GetMapping("/order/delete")
-	public String deleteOrder(@LoginMember LoggedInMember loggedInMember, Long orderId) {
-		orderService.deleteUser(orderId);
+	public String deleteOrder( Long orderId) {
+		orderService.deleteOrder(orderId);
 
 		return "redirect:/order/orders";
 	}
