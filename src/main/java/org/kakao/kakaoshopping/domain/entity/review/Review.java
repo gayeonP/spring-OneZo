@@ -54,4 +54,8 @@ public class Review extends BaseEntity {
 
 	@OneToMany(mappedBy = "review", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<ReviewComment> comments = new ArrayList<>();
+
+	public void test(String name, String password){
+		
+	}
 }

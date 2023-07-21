@@ -1,7 +1,11 @@
 package org.kakao.kakaoshopping.web.dto.item.request;
 
-import org.kakao.kakaoshopping.domain.entity.item.Item;
+import java.math.BigDecimal;
 
+import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.kakao.kakaoshopping.domain.entity.user.User;
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,14 +15,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateItemDTO {
+public class CreateItem {
+	@NotEmpty
 	private String name;
 
-	private Integer price;
+	private BigDecimal price;
 
 	private Integer stock;
 
 	private String itemDetail;
+
+	private User seller;
 
 	public Item toEntity() {
 		return Item.builder()
@@ -27,6 +34,7 @@ public class CreateItemDTO {
 			.stock(stock)
 			.imagePath("path")
 			.itemDetail(itemDetail)
+			.seller(seller)
 			.build();
 	}
 }
