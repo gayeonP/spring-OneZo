@@ -67,8 +67,8 @@ public class OrderController {
 	}
 
 	@GetMapping("/order/delete")
-	public String deleteOrder(@LoginMember LoggedInMember loggedInMember, Long orderId) {
-		orderService.deleteUser(orderId);
+	public String deleteOrder( Long orderId) {
+		orderService.deleteOrder(orderId);
 
 		return "redirect:/order/orders";
 	}
