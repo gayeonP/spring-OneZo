@@ -26,7 +26,7 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
 		long memberId = Long.parseLong(webRequest.getParameter("id"));
 
 		return LoggedInMember.builder()
-			.memberId(memberId)
+			.userId(memberId)
 			.build();
 	}
 }
