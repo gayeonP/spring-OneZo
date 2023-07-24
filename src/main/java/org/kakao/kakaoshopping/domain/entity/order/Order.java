@@ -1,9 +1,8 @@
 package org.kakao.kakaoshopping.domain.entity.order;
 
-import static java.math.BigDecimal.*;
+import static org.kakao.kakaoshopping.domain.enums.CancelStatus.*;
 import static org.kakao.kakaoshopping.domain.enums.Payment.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,19 +44,16 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(columnDefinition = "DECIMAL(18, 2) DEFAULT 0", nullable = false)
-	private BigDecimal totalPrice;
-
 	@Embedded
-	private Delivery delivery;
+	private Delivery Delivery;
 
 	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private PayStatus payStatus = PayStatus.N;
+	private PayStatus payStatus;
 
 	@Column(columnDefinition = "VARCHAR(1)", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private CancelStatus cancelStatus = CancelStatus.N;
+	private CancelStatus cancelStatus = N;
 
 	@Column(columnDefinition = "VARCHAR(30)", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -76,10 +72,7 @@ public class Order {
 	private User user;
 
 	@Builder
-	public Order(Delivery delivery, Payment payment, LocalDateTime orderDate, List<OrderItem> orderItems) {
-		this.delivery = delivery;
-		this.payment = payment;
-		this.orderDate = orderDate;
+	public Order(Long memberId, List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 
@@ -100,12 +93,6 @@ public class Order {
 
 	public void edit(Order order) {
 		this.orderItems = order.getOrderItems();
-	}
-
-	public void calculateTotalPrice() {
-		totalPrice = orderItems.stream()
-			.map(OrderItem::getTotalPrice)
-			.reduce(ZERO, BigDecimal::add);
 	}
 }
 
