@@ -49,7 +49,7 @@ public class Order {
 	private BigDecimal totalPrice;
 
 	@Embedded
-	private Delivery Delivery;
+	private Delivery delivery;
 
 	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -76,7 +76,10 @@ public class Order {
 	private User user;
 
 	@Builder
-	public Order(Long memberId, List<OrderItem> orderItems) {
+	public Order(Delivery delivery, Payment payment, LocalDateTime orderDate, List<OrderItem> orderItems) {
+		this.delivery = delivery;
+		this.payment = payment;
+		this.orderDate = orderDate;
 		this.orderItems = orderItems;
 	}
 
