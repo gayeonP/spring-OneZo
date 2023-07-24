@@ -10,6 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
+
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		// 컨트롤러의 파라미터를 체크하는데 내부적으로 캐시가 동작하여 한 번 체크하면 다음부터는 캐시에 저장된 값을 사용함
@@ -23,10 +24,10 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 	public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer,
 		@NonNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 
-		long memberId = Long.parseLong(webRequest.getParameter("id"));
+		long userId = Long.parseLong(webRequest.getParameter("id"));
 
 		return LoggedInUser.builder()
-			.userId(memberId)
+			.userId(userId)
 			.build();
 	}
 }

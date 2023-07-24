@@ -23,7 +23,14 @@ public class PhoneNumber {
     @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
     private String tailNumber;
 
+    @Builder
+    public PhoneNumber(String headNumber, String middleNumber, String tailNumber) {
+      this.headNumber = headNumber;
+      this.middleNumber = middleNumber;
+      this.tailNumber = tailNumber;
+    }
+
     public String toStringPhone() {
-        return headNumber + " - " + middleNumber + " - " + tailNumber;
+      return headNumber + " - " + middleNumber + " - " + tailNumber;
     }
 }

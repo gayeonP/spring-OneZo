@@ -68,4 +68,9 @@ public class Item extends BaseEntity {
 		this.imagePath = imagePath;
 		this.itemDetail = itemDetail;
 	}
+
+	@Builder(builderMethodName = "byId", buildMethodName = "buildById")
+	public Item(Long id) {
+		this.id = id;
+	}
 }
