@@ -47,9 +47,8 @@ public class OrderService {
 		return savedOrder.getId();
 	}
 
-	public void deleteUser(Long id) {
-		Order savedOrder = findById(id);
-		orderRepository.delete(savedOrder);
+	public void deleteOrder(Long id) {
+		orderRepository.deleteById(id);
 	}
 
 	private Order findById(Long id) {

@@ -12,5 +12,4 @@ public class KakaoShoppingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KakaoShoppingApplication.class, args);
 	}
-
 }

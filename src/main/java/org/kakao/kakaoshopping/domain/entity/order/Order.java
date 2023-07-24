@@ -3,6 +3,7 @@ package org.kakao.kakaoshopping.domain.entity.order;
 import static org.kakao.kakaoshopping.domain.enums.CancelStatus.*;
 import static org.kakao.kakaoshopping.domain.enums.Payment.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,9 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(columnDefinition = "DECIMAL(18, 2) DEFAULT 0", nullable = false)
+	private BigDecimal totalPrice;
 
 	@Embedded
 	private Delivery Delivery;

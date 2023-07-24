@@ -1,21 +1,43 @@
 const cartForm = document.getElementById("cart-form");
 const cartItems = document.getElementById("cart-items");
 const totalPrice = document.getElementById("total-price");
-const checkout = document.getElementById("checkout-btn");
+const checkOut = document.getElementById("checkout-btn");
 
 // Attach event listeners
 cartForm.addEventListener("click", handleButtonClick);
-cartForm.addEventListener("submit", function(event) {
+cartForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting
 });
-checkout.addEventListener("click", goToPay);
+checkOut.addEventListener("click", function (event) {
+    saveCartItems();
+    window.location.href = "http://localhost:63342/untitled3/untitled3.main/payment.html";
+});
+
+
+function saveCartItems() {
+    const cartItem = [];
+    const allCheckboxes = cartItems.querySelectorAll(".item-checkbox");
+
+    allCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            const itemDiv = checkbox.parentElement;
+            const productName = itemDiv.querySelector(".product-name").textContent;
+            const productQuantity = parseInt(itemDiv.querySelector(".product-quantity").textContent);
+            const productPrice = parseFloat(itemDiv.querySelector(".product-price").textContent);
+            cartItem.push({
+                name: productName,
+                quantity: productQuantity,
+                price: productPrice
+            });
+        }
+    });
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItem));
+}
 
 function handleButtonClick(event) {
     if (event.target.classList.contains("btn-add")) {
         handleQuantityChange(event.target, 1);
-        if(localStorage.getItem("items") === null){
-            localStorage.setItem("items", )
-        }
     } else if (event.target.classList.contains("btn-sub")) {
         handleQuantityChange(event.target, -1);
     } else if (event.target.classList.contains("btn-remove-item")) {
@@ -68,7 +90,42 @@ function updateTotalPrice() {
     totalPrice.textContent = totalPriceValue.toFixed(2);
 }
 
-function goToPay(){
-    window.location.href = "http://localhost:63342/kakaoShopping/src/main/resources/templates/payment.html?_ijt=voqum5c6ejvnrdn55a2skc8qjg&totalPrice="
-    + document.getElementById("total-price").innerText;
+function showTable(tableName) {
+    // Hide all tables
+    document.querySelectorAll('.user_table, .product_table, .order_table').forEach(table => {
+        table.style.display = 'none';
+    });
+
+    // Show the selected table
+    document.querySelector('.' + tableName).style.display = 'block';
 }
+
+$('#carousel-related-product').slick({
+    infinite: true,
+    arrows: false,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    dots: true,
+    responsive: [{
+        breakpoint: 1024,
+        settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3
+        }
+    },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 3
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 3
+            }
+        }
+    ]
+});

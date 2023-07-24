@@ -1,5 +1,6 @@
 package org.kakao.kakaoshopping.domain.entity.order;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.kakao.kakaoshopping.domain.entity.BaseEntity;
@@ -34,8 +35,8 @@ public class OrderItem extends BaseEntity {
 	@Column(columnDefinition = "INT DEFAULT 0", nullable = false)
 	private Integer quantity;
 
-	@Column(columnDefinition = "INT DEFAULT 0", nullable = false)
-	private Integer price;
+	@Column(columnDefinition = "DECIMAL(18,2) DEFAULT 0", nullable = false)
+	private BigDecimal price;
 
 	@CustomCreateDate
 	@Column(updatable = false)
