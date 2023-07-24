@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문상세"/>
+    <th:block th:fragment="content">
+        <div class="container mt-5">
+            <h2>회원가입</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="username" class="form-label">사용자 이름</label>
+                    <input type="text" class="form-control" id="username" placeholder="사용자 이름을 입력하세요">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일 주소</label>
+                    <input type="email" class="form-control" id="email" placeholder="이메일 주소를 입력하세요">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                </div>
+                <button type="submit" class="btn btn-primary">가입하기</button>
+            </form>
+        </div>
+    </th:block>
+</th:block>
+
+

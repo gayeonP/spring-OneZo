@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문상세"/>
+    <th:block th:fragment="content">
+
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div class="row">
+
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="mb-0">Order Details</h3>
+                                </div>
+                                <div class="card-body" id="order-details">
+                                    <!-- Order details will be displayed here -->
+                                    <ul class="list-group" id="cart-items">
+                                        <li class="list-group-item">
+                                            <div class="product-info">
+                                                <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                <span class="product-name">Product 1</span>
+                                                <span class="product-quantity">1</span>
+                                                <span class="product-price">29.99</span>
+                                            </div>
+                                        </li>
+                                        <!-- Add checkboxes and modify other items similarly -->
+                                    </ul>
+                                    <p>Price: $29.99</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="mb-0">Product Details</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form id="paymentForm" action="/process_payment" method="POST">
+                                        <div class="form-group">
+                                            <label for="paymentMethod">Payment Method</label>
+                                            <select class="form-control" id="paymentMethod" name="paymentMethod"
+                                                    required>
+                                                <option value="">Select a payment method</option>
+                                                <option value="credit_card">Credit Card</option>
+                                                <option value="paypal">PayPal</option>
+                                                <!-- Add more payment options as needed -->
+                                            </select>
+                                        </div>
+                                        <div id="creditCardFields">
+                                            <div class="form-group">
+                                                <label for="cardNumber">Card Number</label>
+                                                <input type="text" class="form-control" id="cardNumber"
+                                                       name="cardNumber"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="expiryDate">Expiry Date</label>
+                                                <input type="text" class="form-control" id="expiryDate"
+                                                       name="expiryDate"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cvv">CVV</label>
+                                                <input type="text" class="form-control" id="cvv" name="cvv" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cardHolderName">Card Holder Name</label>
+                                                <input type="text" class="form-control" id="cardHolderName"
+                                                       name="cardHolderName" required>
+                                            </div>
+                                        </div>
+                                        <div id="paypalFields" style="display: none;">
+                                            <!-- Add PayPal-specific fields here -->
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Purchase Now</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- End Content -->
+    </th:block>
+</th:block>
