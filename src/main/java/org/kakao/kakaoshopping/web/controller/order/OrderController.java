@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
-import org.kakao.kakaoshopping.web.annotaion.LoginUser;
+import org.kakao.kakaoshopping.web.annotaion.LoginMember;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
+import org.kakao.kakaoshopping.web.dto.member.login.LoggedInMember;
 import org.kakao.kakaoshopping.web.dto.order.request.CreateOrder;
 import org.kakao.kakaoshopping.web.dto.order.request.EditOrder;
 import org.kakao.kakaoshopping.web.dto.order.response.OrderSimpleView;
@@ -26,10 +26,9 @@ public class OrderController {
 	private final OrderService orderService;
 
 	@PostMapping("/order/create")
-	public String createOrder(CreateOrder createOrder, @LoginUser LoggedInUser loginUser,
+	public String createOrder(CreateOrder createOrder, @LoginMember LoggedInMember loggedInMember,
 		RedirectAttributes rttr) {
-		
-		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), loginUser.getUserId());
+		Long saveOrderId = orderService.creatOrder(createOrder.toEntity());
 
 		rttr.addFlashAttribute("orderId", saveOrderId);
 
@@ -37,7 +36,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/order")
-	public String findOrder(Long orderId, Model model) {
+	public String findOrder(@LoginMember LoggedInMember loggedInMember, Long orderId, Model model) {
 		Order order = orderService.findOrder(orderId);
 
 		model.addAttribute("order", new OrderSimpleView(order));
@@ -46,7 +45,7 @@ public class OrderController {
 	}
 
 	@GetMapping("/orders")
-	public String findOrders(@LoginUser LoggedInUser loggedInUser, OrderSearchCondition condition, Model model) {
+	public String findOrders(@LoginMember LoggedInMember loggedInMember, OrderSearchCondition condition, Model model) {
 		Page<Order> orders = orderService.findOrders(condition);
 
 		List<OrderSimpleView> orderViews = orders.getContent().stream()
@@ -59,7 +58,7 @@ public class OrderController {
 	}
 
 	@PostMapping("/order/edit")
-	public String editOrder(@LoginUser LoggedInUser loggedInUser, EditOrder editOrder, Model model) {
+	public String editOrder(@LoginMember LoggedInMember loggedInMember, EditOrder editOrder, Model model) {
 		Long orderId = orderService.editOrder(editOrder.toEntity(), editOrder.getId());
 
 		model.addAttribute("orderId", orderId);
@@ -68,8 +67,8 @@ public class OrderController {
 	}
 
 	@GetMapping("/order/delete")
-	public String deleteOrder(Long orderId) {
-		orderService.deleteOrder(orderId);
+	public String deleteOrder(@LoginMember LoggedInMember loggedInMember, Long orderId) {
+		orderService.deleteUser(orderId);
 
 		return "redirect:/order/orders";
 	}

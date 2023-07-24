@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<!--/* 마치 인클루드처럼, basic 레이아웃을 1개 만들고 내부의 화면은 따로 매개변수처럼 넣어줌 */-->
+<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문목록"/>
+    <th:block th:fragment="content">
+    </th:block>
+</th:block>

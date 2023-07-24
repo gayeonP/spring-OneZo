@@ -9,6 +9,8 @@ import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,10 +43,14 @@ public class Cart {
 	@Setter
 	private Item item;
 
+	@Column(columnDefinition = "TEXT DEFAULT ''", nullable = false)
+	private String contents;
+
 	@Column(nullable = false)
 	private Integer quantity;
 
-	@Column(columnDefinition = "VARCHAR(1) DEFAULT ''", nullable = false)
+	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 
 	@CustomCreateDate
