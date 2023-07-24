@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이템 리스트 페이지 test</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>이미지</th>
+        <th>상품명</th>
+        <th>가격</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td><img th:src="${item.getImagePath()}" th:alt="${item.getImagePath()}"></td>
+        <td th:text="${item.getName()}"></td>
+        <td th:text="${item.getPrice()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
