@@ -53,13 +53,19 @@ public class OrderItem extends BaseEntity {
 	private Item item;
 
 	@Builder
-	public OrderItem(int quantity) {
+	public OrderItem(Integer quantity, BigDecimal price, Item item) {
 		this.quantity = quantity;
+		this.price = price;
+		this.item = item;
 	}
 
 	@Builder(builderMethodName = "toEdit")
 	public OrderItem(Long id, Integer quantity) {
 		this.id = id;
 		this.quantity = quantity;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return price.multiply(BigDecimal.valueOf(quantity));
 	}
 }
