@@ -11,8 +11,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ItemSimpleView {
+public class ItemComplexView {
     private String name;
     private BigDecimal price;
+    private Integer stock;
     private String imagePath;
+    private String itemDetail;
+    private String sellerName;
 }

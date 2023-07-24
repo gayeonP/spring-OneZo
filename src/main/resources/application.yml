@@ -3,11 +3,12 @@ spring:
     active: dev
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
+    show-sql: true
 
 logging.level:
   org.hibernate.orm.jdbc.bind: trace
