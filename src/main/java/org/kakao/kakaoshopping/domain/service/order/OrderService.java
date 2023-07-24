@@ -57,6 +57,14 @@ public class OrderService {
 		return savedOrder.getId();
 	}
 
+	/**
+	 * 기능 : 상품을 삭제한다.
+	 * 작성자 - 장원준
+	 * 작성일 - 2023.07.20
+	 * 수정자 - 임창준
+	 * 수정일 - 2023.07.21
+	 * @param id
+	 */
 	public void deleteOrder(Long id) {
 		orderRepository.deleteById(id);
 	}

@@ -12,6 +12,13 @@ import org.kakao.kakaoshopping.domain.enums.Payment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 기능 : 주문 정보 데이터를 생성할 DTD
+ * 작성자 - 장원준
+ * 작성일 - 2023.07.20
+ * 수정자 - 임창준
+ * 수정일 - 2023.07.21
+ */
 @Data
 @NoArgsConstructor
 public class OrderSimpleView {

@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Embeddable
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+/**
+ * 기능 : 연락처 번호 엔티티 & 전화번호 형식으로 데이터 가공
+ * 작성자 - 장원준
+ * 작성일 - 2023.07.20
+ * 수정자 - 임창준
+ * 수정일 - 2023.07.21
+ */
 public class PhoneNumber {
 
     @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)

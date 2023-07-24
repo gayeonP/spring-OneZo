@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// 상품 정보에 대한 데이터가 들어온다.
 public class CreateOrderItem {
 
 	private Long itemId;

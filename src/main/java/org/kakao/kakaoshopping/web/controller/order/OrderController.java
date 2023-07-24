@@ -67,6 +67,14 @@ public class OrderController {
 		return "redirect:/order/orders";
 	}
 
+	/**
+	 * 기능 : 삭제기능으로 분기하는 컨트롤러
+	 * 작성자 - 장원준
+	 * 작성일 - 2023.07.20
+	 * 수정자 - 임창준
+	 * 수정일 - 2023.07.21
+	 * @param orderId
+	 */
 	@GetMapping("/order/delete")
 	public String deleteOrder(Long orderId) {
 		orderService.deleteOrder(orderId);
