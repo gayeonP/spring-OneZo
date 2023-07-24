@@ -4,6 +4,8 @@ import static java.util.Locale.*;
 
 import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.repository.order.OrderRepository;
+import org.kakao.kakaoshopping.domain.service.item.ItemService;
+import org.kakao.kakaoshopping.domain.service.user.UserService;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
 import org.kakao.kakaoshopping.web.exception.OrderNotFound;
 import org.springframework.context.MessageSource;
@@ -21,10 +23,18 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	private final MessageSource messageSource;
 	private final OrderItemService orderItemService;
+	private final UserService userService;
+	private final ItemService itemService;
 
-	public Long creatOrder(Order order) {
+	public Long creatOrder(Order order, Long userId) {
+		//		User user = userService.findUser(userId);
+		//order.setUser(user);
+		order.calculateTotalPrice();
 		order.getOrderItems().forEach(orderItem -> {
-			// JPA 연관관계를 매핑해줌
+			Long itemId = orderItem.getItem().getId();
+			// todo
+			// Item item = itemService.findItem(itemId);
+			// orderItem.setItem(item);
 			orderItem.setOrder(order);
 			orderItemService.createOrderItem(orderItem);
 		});
@@ -47,9 +57,8 @@ public class OrderService {
 		return savedOrder.getId();
 	}
 
-	public void deleteUser(Long id) {
-		Order savedOrder = findById(id);
-		orderRepository.delete(savedOrder);
+	public void deleteOrder(Long id) {
+		orderRepository.deleteById(id);
 	}
 
 	private Order findById(Long id) {

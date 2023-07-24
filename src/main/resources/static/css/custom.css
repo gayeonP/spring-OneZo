@@ -1,0 +1,34 @@
+/*
+Custom Css
+*/
+.nav-link-custom {
+    display: block;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    font-weight: bold !important;
+    font-size: medium !important;
+}
+
+.contents-cart {
+    position: relative;
+    width: 900px;
+    border: 1px solid #e0e0e0;
+    margin: 0 auto 70px;
+    padding: 40px 39px;
+    background: #fff;
+}
+
+#wrap {
+    position: relative;
+    clear: both;
+    width: 100%;
+    height: 100%;
+}
+
+.cart-title {
+    clear: both;
+    height: 45px;
+    margin-bottom: 0;
+    padding-bottom: 32px;
+
+}
