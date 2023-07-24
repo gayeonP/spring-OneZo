@@ -13,14 +13,20 @@ import org.kakao.kakaoshopping.domain.entity.item.Item;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ItemSimpleView {
+public class ItemComplexView {
     private String name;
     private BigDecimal price;
+    private Integer stock;
     private String imagePath;
+    private String itemDetail;
+    private String sellerName;
 
-    public ItemSimpleView(Item item) {
+    public ItemComplexView(Item item){
         this.name = item.getName();
-        this.price = item.getPrice();
         this.imagePath = item.getImagePath();
+        this.itemDetail = item.getItemDetail();
+        this.price = item.getPrice();
+        this.stock = item.getStock();
+        this.sellerName = item.getSeller().getName();
     }
 }

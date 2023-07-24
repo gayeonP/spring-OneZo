@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>단일 아이템 TEST</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>이미지</th>
+        <th>상품명</th>
+        <th>가격</th>
+        <!--        <th>재고</th>-->
+        <th>상세설명</th>
+        <th>판매자</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><img th:src="${item.getImagePath()}" th:alt="${item.getImagePath()}"></td>
+        <td th:text="${item.getName()}"></td>
+        <td th:text="${item.getPrice()}"></td>
+        <!--    <td th:text="${item.getStock()}"></td>-->
+        <td th:text="${item.getItemDetail()}"></td>
+        <td th:text="${item.getSellerName()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
