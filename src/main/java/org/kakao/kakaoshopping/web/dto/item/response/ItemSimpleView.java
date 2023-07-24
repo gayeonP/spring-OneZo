@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+import org.kakao.kakaoshopping.domain.entity.item.Item;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,4 +17,10 @@ public class ItemSimpleView {
     private String name;
     private BigDecimal price;
     private String imagePath;
+
+    public ItemSimpleView(Item item) {
+        this.name = item.getName();
+        this.price = item.getPrice();
+        this.imagePath = item.getImagePath();
+    }
 }
