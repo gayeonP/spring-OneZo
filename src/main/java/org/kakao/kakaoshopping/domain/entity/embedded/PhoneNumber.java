@@ -20,21 +20,10 @@ public class PhoneNumber {
     @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
     private String middleNumber;
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
-	private String tailNumber;
-=======
-=======
->>>>>>> Stashed changes
     @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
     private String tailNumber;
 
     public String toStringPhone() {
         return headNumber + " - " + middleNumber + " - " + tailNumber;
     }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 }
