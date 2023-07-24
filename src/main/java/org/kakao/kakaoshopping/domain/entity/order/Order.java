@@ -1,6 +1,6 @@
 package org.kakao.kakaoshopping.domain.entity.order;
 
-import static org.kakao.kakaoshopping.domain.enums.CancelStatus.*;
+import static java.math.BigDecimal.*;
 import static org.kakao.kakaoshopping.domain.enums.Payment.*;
 
 import java.math.BigDecimal;
@@ -53,11 +53,11 @@ public class Order {
 
 	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private PayStatus payStatus;
+	private PayStatus payStatus = PayStatus.N;
 
 	@Column(columnDefinition = "VARCHAR(1)", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private CancelStatus cancelStatus = N;
+	private CancelStatus cancelStatus = CancelStatus.N;
 
 	@Column(columnDefinition = "VARCHAR(30)", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -100,6 +100,12 @@ public class Order {
 
 	public void edit(Order order) {
 		this.orderItems = order.getOrderItems();
+	}
+
+	public void calculateTotalPrice() {
+		totalPrice = orderItems.stream()
+			.map(OrderItem::getTotalPrice)
+			.reduce(ZERO, BigDecimal::add);
 	}
 }
 
