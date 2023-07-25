@@ -1,15 +1,18 @@
 package org.kakao.kakaoshopping.web.argumentResolver;
 
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
+import org.kakao.kakaoshopping.web.dto.member.login.LoggedInMember;
 import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
+@Component
+public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -24,9 +27,9 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 	public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer,
 		@NonNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 
-		long userId = Long.parseLong(webRequest.getParameter("id"));
+		String userId = webRequest.getParameter("userId");
 
-		return LoggedInUser.builder()
+		return LoggedInMember.builder()
 			.userId(userId)
 			.build();
 	}
