@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="setContent(title, content)">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title th:replace="${title}">레이아웃 타이틀</title>
+
+        <!-- 기본 JS, CSS 파일 -->
+        <th:block th:replace="fragments/default-resources"/>
+    </head>
+
+    <body>
+    <th:block th:replace="fragments/nav"/>
+    <div id="layoutSidenav">
+        <th:block th:replace="fragments/header"/>
+        <div id="layoutSidenav_content">
+            <main>
+                <th:block th:replace="${content}"/>
+            </main>
+        </div>
+    </div>
+    </body>
+</th:block>
+</html>
