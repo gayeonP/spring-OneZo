@@ -54,6 +54,7 @@ dependencies {
 
     // thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 }
 
 tasks.named('test') {
