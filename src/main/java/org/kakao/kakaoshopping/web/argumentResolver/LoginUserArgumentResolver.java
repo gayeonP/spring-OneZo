@@ -1,8 +1,7 @@
 package org.kakao.kakaoshopping.web.argumentResolver;
 
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInMember;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -11,8 +10,11 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Component
-public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolver {
+public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -26,11 +28,10 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
 	@Override
 	public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer,
 		@NonNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+		HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
+		HttpSession session = request.getSession();
+		LoggedInUser loggedInUser = (LoggedInUser)session.getAttribute("LoggedInUser");
 
-		String userId = webRequest.getParameter("userId");
-
-		return LoggedInMember.builder()
-			.userId(userId)
-			.build();
+		return loggedInUser;
 	}
 }

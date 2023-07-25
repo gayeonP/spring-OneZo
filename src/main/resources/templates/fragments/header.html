@@ -31,13 +31,13 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <th:block th:if="${loggedInMember == null}">
+                    <th:block th:if="${session.loggedInUser == null}">
                         <a class="nav-link-custom" style="font-weight: bold" th:href="@{login}">로그인</a>
                         <a class="nav-link-custom" th:href="@{join}">회원가입</a>
                     </th:block>
-                    <th:block th:unless="${loggedInMember != null}">
+                    <th:block th:unless="${session.loggedInUser != null}">
                         <a class="nav-link-custom" th:href="@{join}">새 글 쓰기</a>
-                        <a class="nav-link-custom" th:href="@{index}" th:text="${loggedInMember.userId}">userId</a>
+                        <a class="nav-link-custom" th:href="@{index}" th:text="${session.loggedInUser.nickname}">nickname</a>
                         <form th:action="@{logout}" method="post" class="d-inline">
                             <button type="submit" class="nav-link-custom">로그아웃</button>
                         </form>

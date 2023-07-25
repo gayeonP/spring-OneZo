@@ -2,9 +2,8 @@ package org.kakao.kakaoshopping.web.interceptor;
 
 import java.io.IOException;
 
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInMember;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,26 +15,17 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws
 		IOException {
 
-		HttpSession session = request.getSession();
-
-		if (session.getAttribute("loggedInMember") != null) {
-			response.sendRedirect("/index");
+		if (getLoggedInMemberFromSession(request) == null) {
+			response.sendRedirect("/login");
 		}
 
 		return true;
 	}
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-		ModelAndView modelAndView) {
-
-		modelAndView.addObject("loggedInMember", getLoggedInMemberFromSession(request));
-	}
-
-	private LoggedInMember getLoggedInMemberFromSession(HttpServletRequest request) {
+	private LoggedInUser getLoggedInMemberFromSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		LoggedInMember loggedInMember = (LoggedInMember)session.getAttribute("loggedInMember");
+		LoggedInUser loggedInUser = (LoggedInUser)session.getAttribute("loggedInUser");
 
-		return loggedInMember;
+		return loggedInUser;
 	}
 }

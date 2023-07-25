@@ -6,10 +6,10 @@ import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
 import org.kakao.kakaoshopping.web.dto.order.request.CreateOrder;
 import org.kakao.kakaoshopping.web.dto.order.request.EditOrder;
 import org.kakao.kakaoshopping.web.dto.order.response.OrderSimpleView;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ public class OrderController {
 	@PostMapping("/order/create")
 	public String createOrder(CreateOrder createOrder, @LoginUser LoggedInUser loginUser,
 		RedirectAttributes rttr) {
-		
+
 		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), loginUser.getUserId());
 
 		rttr.addFlashAttribute("orderId", saveOrderId);
