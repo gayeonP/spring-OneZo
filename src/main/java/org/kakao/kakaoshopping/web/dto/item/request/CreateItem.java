@@ -1,40 +1,44 @@
 package org.kakao.kakaoshopping.web.dto.item.request;
 
-import java.math.BigDecimal;
-
-import org.kakao.kakaoshopping.domain.entity.item.Item;
-import org.kakao.kakaoshopping.domain.entity.user.User;
-
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.kakao.kakaoshopping.domain.entity.user.User;
 
+import java.math.BigDecimal;
+
+/**
+ * 기능 : 새로운 상품을 등록하기 위한 DTO
+ * 작성자 - 박가연
+ * 작성일 - 2023.07.24
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateItem {
-	@NotEmpty
-	private String name;
+    @NotEmpty
+    private String name;
 
-	private BigDecimal price;
+    private BigDecimal price;
 
-	private Integer stock;
+    private Integer stock;
 
-	private String itemDetail;
+    private String itemDetail;
 
-	private User seller;
+    private User seller;
 
-	public Item toEntity() {
-		return Item.builder()
-			.name(name)
-			.price(price)
-			.stock(stock)
-			.imagePath("path")
-			.itemDetail(itemDetail)
-			.seller(seller)
-			.build();
-	}
+    public Item toEntity() {
+        return Item.builder()
+                .name(name)
+                .price(price)
+                .stock(stock)
+                .imagePath("path")
+                .itemDetail(itemDetail)
+                .seller(seller)
+                .build();
+    }
 }
