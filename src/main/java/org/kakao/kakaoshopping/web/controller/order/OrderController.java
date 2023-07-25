@@ -1,7 +1,6 @@
 package org.kakao.kakaoshopping.web.controller.order;
 
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
@@ -16,13 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
 
-	private final OrderService orderService;
+    private final OrderService orderService;
 
 	/**
 	 * 기능 : 주문을 등록한다.
@@ -98,11 +97,13 @@ public class OrderController {
 	public String findOrders(@LoginUser LoggedInUser loggedInUser, OrderSearchCondition condition, Model model) {
 		Page<Order> orders = orderService.findOrders(condition);
 
-		List<OrderSimpleView> orderViews = orders.getContent().stream()
-			.map(OrderSimpleView::new)
-			.toList();
+    @GetMapping("/orders")
+    public String findOrders(@LoginUser LoggedInUser loggedInMember, OrderSearchCondition condition, Model model) {
+        Page<Order> orders = orderService.findOrders(condition);
 
-		model.addAttribute("orders", orderViews);
+        List<OrderSimpleView> orderViews = orders.getContent().stream()
+                .map(OrderSimpleView::new)
+                .toList();
 
 		return "order/orderViews";
 	}
