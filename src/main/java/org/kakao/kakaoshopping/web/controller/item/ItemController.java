@@ -5,6 +5,7 @@ import org.kakao.kakaoshopping.domain.entity.item.Item;
 import org.kakao.kakaoshopping.domain.service.item.ItemService;
 import org.kakao.kakaoshopping.web.common.paging.request.ItemSearchCondition;
 import org.kakao.kakaoshopping.web.dto.item.request.CreateItem;
+import org.kakao.kakaoshopping.web.dto.item.request.EditItem;
 import org.kakao.kakaoshopping.web.dto.item.request.ReadItem;
 import org.kakao.kakaoshopping.web.dto.item.response.ItemComplexView;
 import org.kakao.kakaoshopping.web.dto.item.response.ItemSimpleView;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -76,9 +76,16 @@ public class ItemController {
      * @return String
      */
     @PostMapping("/seller/createItem")
-    public String createItem(@RequestBody CreateItem createItemDTO) {
+    public String createItem(CreateItem createItemDTO) {
         Long id = itemService.createItem(createItemDTO.toEntity());
         return "redirect:/page";
+    }
+
+    @PostMapping("/seller/editItem")
+    public String editItem(EditItem editItem, Long itemId, Model model) {
+        Item item = itemService.editItem(editItem.toEntity(), itemId);
+        model.addAttribute("item", item);
+        return "item/itemView";
     }
 
 }

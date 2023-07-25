@@ -2,7 +2,6 @@ package org.kakao.kakaoshopping.domain.service.item;
 
 import lombok.RequiredArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
-import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.repository.item.ItemRepository;
 import org.kakao.kakaoshopping.domain.repository.user.UserRepository;
 import org.kakao.kakaoshopping.web.exception.ItemNotFound;
@@ -66,23 +65,18 @@ public class ItemService {
      * 기능: 상품 정보를 수정하는 기능을 한다.
      * 작성자: 장규민
      * 작성일: 2023.07.24
+     * 수정자: 장규민
+     * 수정일: 2023.07.25
      *
-     * @param item
-     * @param memberId
+     * @param editItem
      * @param itemId
      */
     @Transactional
-    public void editItem(Item item, Long memberId, Long itemId) {
+    public Item editItem(Item editItem, Long itemId) {
         // TODO login 기능 완성 후 추가 수정 있을 수 있음
-        User user = userRepository.findById(memberId).get();
-        Item findItem = itemRepository.findById(itemId).get();
-        findItem.toEdit()
-                .name(item.getName())
-                .itemDetail(item.getItemDetail())
-                .price(item.getPrice())
-                .stock(item.getStock())
-                .imagePath(item.getImagePath())
-                .build();
+        Item item = findById(itemId);
+        item.editItem(editItem);
+        return item;
     }
 
     /**
@@ -92,6 +86,7 @@ public class ItemService {
      *
      * @param itemId
      */
+    @Transactional
     public void deleteItem(Long itemId) {
         Item item = findById(itemId);
         itemRepository.delete(item);

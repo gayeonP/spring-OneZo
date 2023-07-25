@@ -2,7 +2,6 @@ package org.kakao.kakaoshopping.domain.entity.embedded;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Embeddable
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class PhoneNumber {
 
@@ -25,12 +23,12 @@ public class PhoneNumber {
 
     @Builder
     public PhoneNumber(String headNumber, String middleNumber, String tailNumber) {
-      this.headNumber = headNumber;
-      this.middleNumber = middleNumber;
-      this.tailNumber = tailNumber;
+        this.headNumber = headNumber;
+        this.middleNumber = middleNumber;
+        this.tailNumber = tailNumber;
     }
 
     public String toStringPhone() {
-      return headNumber + " - " + middleNumber + " - " + tailNumber;
+        return headNumber + " - " + middleNumber + " - " + tailNumber;
     }
 }

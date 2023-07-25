@@ -17,7 +17,7 @@ public class Item extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(50) DEFAULT ''", nullable = false)
+    @Column(columnDefinition = "VARCHAR(100) DEFAULT ''", nullable = false)
     private String name;
 
     @Column(columnDefinition = "DECIMAL(18, 2) DEFAULT 0", nullable = false)
@@ -37,15 +37,15 @@ public class Item extends BaseEntity {
     @Setter
     private User seller;
 
-    @Builder
-    public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail, User seller) {
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.imagePath = imagePath;
-        this.itemDetail = itemDetail;
-        this.seller = seller;
-    }
+	@Builder
+	public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail, User seller) {
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.imagePath = imagePath;
+		this.itemDetail = itemDetail;
+		this.seller = seller;
+	}
 
 	@Builder(builderMethodName = "toEdit")
 	public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail) {
@@ -54,10 +54,5 @@ public class Item extends BaseEntity {
 		this.stock = stock;
 		this.imagePath = imagePath;
 		this.itemDetail = itemDetail;
-	}
-
-	@Builder(builderMethodName = "byId", buildMethodName = "buildById")
-	public Item(Long id) {
-		this.id = id;
 	}
 }

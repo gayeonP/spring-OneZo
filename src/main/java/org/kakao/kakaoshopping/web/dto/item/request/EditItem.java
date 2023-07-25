@@ -30,7 +30,7 @@ public class EditItem {
     private String itemDetail;
 
     public Item toEntity() {
-        return Item.builder()
+        return Item.toEdit()
                 .name(name)
                 .price(price)
                 .stock(stock)
