@@ -24,7 +24,8 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 	public Object resolveArgument(@NonNull MethodParameter parameter, ModelAndViewContainer mavContainer,
 		@NonNull NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 
-		long userId = Long.parseLong(webRequest.getParameter("id"));
+		//long userId = Long.parseLong(webRequest.getParameter("id"));
+		long userId = 0L;
 
 		return LoggedInUser.builder()
 			.userId(userId)
