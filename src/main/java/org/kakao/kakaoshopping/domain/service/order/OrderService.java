@@ -3,6 +3,7 @@ package org.kakao.kakaoshopping.domain.service.order;
 import static java.util.Locale.*;
 
 import org.kakao.kakaoshopping.domain.entity.order.Order;
+import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.repository.order.OrderRepository;
 import org.kakao.kakaoshopping.domain.service.item.ItemService;
 import org.kakao.kakaoshopping.domain.service.user.UserService;
@@ -27,19 +28,28 @@ public class OrderService {
 	private final ItemService itemService;
 
 	public Long creatOrder(Order order, Long userId) {
-		//		User user = userService.findUser(userId);
-		//order.setUser(user);
+		// todo 재고가 0이면 반려해야 됨
+		User user = userService.findUser(userId);
+		order.setUser(user);
 		order.calculateTotalPrice();
 		order.getOrderItems().forEach(orderItem -> {
 			Long itemId = orderItem.getItem().getId();
 			// todo
-			// Item item = itemService.findItem(itemId);
-			// orderItem.setItem(item);
+			//Item item = itemService.findItem(itemId);
+			//orderItem.setItem(item);
 			orderItem.setOrder(order);
 			orderItemService.createOrderItem(orderItem);
 		});
 
 		return orderRepository.save(order).getId();
+	}
+
+	public Long creatOrderFromCart(Order order, Long userId, Long cardId) {
+		// 장바구니 삭제해줌
+		// cartService.deleteCart(cartId)
+		//
+
+		return creatOrder(order, userId);
 	}
 
 	public Order findOrder(Long id) {
