@@ -27,6 +27,9 @@ public class User extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(columnDefinition = "VARCHAR(20)", nullable = false, unique = true)
+	private String userId;
+
 	@Column(columnDefinition = "VARCHAR(50)", nullable = false, unique = true)
 	private String email;
 
