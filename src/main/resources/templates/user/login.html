@@ -2,20 +2,21 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 
+
 <th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문상세"/>
+    <title th:text="로그인"/>
     <th:block th:fragment="content">
         <div class="container py-5">
             <div class="row py-5">
                 <form class="col-md-9 m-auto" method="post" role="form">
                     <div class="row">
                         <div class="form-group col-md-6 mb-3">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control mt-1" id="username" name="username"
-                                   placeholder="Username">
+                            <label for="userId">UserId</label>
+                            <input type="text" class="form-control mt-1" id="userId" name="userId"
+                                   placeholder="UserId">
                         </div>
                         <div class="form-group col-md-6 mb-3">
-                            <label for="inputPassword">Password</label>
+                            <label for="password">Password</label>
                             <input type="password" class="form-control mt-1" id="password" name="password"
                                    placeholder="Password">
                         </div>
