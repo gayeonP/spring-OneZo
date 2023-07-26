@@ -7,6 +7,7 @@ import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.repository.inquiry.InquiryRepository;
 import org.kakao.kakaoshopping.domain.service.user.UserService;
 import org.kakao.kakaoshopping.web.common.paging.request.InquirySearchCondition;
+import org.kakao.kakaoshopping.web.dto.inquiry.request.EditInquiry;
 import org.kakao.kakaoshopping.web.exception.InquiryNotFound;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
@@ -54,7 +55,7 @@ public class InquiryService {
 	}
 
 	/**
-	 * 기능 : 문의게시글을 페이징 처리하여 가져와 조회한다.
+	 * 기능 : 문의게시글을 페이징 처리하여 가져와 조회하는 메소드
 	 * 작성자 - 임창준
 	 * 작성일 - 2020.07.25
 	 * @param condition
@@ -68,7 +69,12 @@ public class InquiryService {
 	// 게시글 수정
 	// todo
 
-	// 게시글 삭제
+	/**
+	 * 기능 : 상품문의 게시글을 삭제하는 메소드
+	 * 작성자 - 임창준
+	 * 작성일 - 2020.07.25
+	 * @param inquiryId
+	 */
 	public void deleteInquiry(Long inquiryId) {
 		inquiryRepository.deleteById(inquiryId);
 	}
@@ -76,5 +82,11 @@ public class InquiryService {
 	private Inquiry findById(Long id) {
 		return inquiryRepository.findById(id)
 			.orElseThrow(() -> new InquiryNotFound(messageSource.getMessage("error.noInquiry", null, getDefault())));
+	}
+
+	public void editInquriy(Long inquiryId, EditInquiry editInquiry) {
+		Inquiry savedInquiry = inquiryRepository.findById(inquiryId).orElseThrow();
+		savedInquiry.changeTitle(editInquiry.getTitle());
+		savedInquiry.changeContents(editInquiry.getContents());
 	}
 }

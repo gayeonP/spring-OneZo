@@ -7,14 +7,16 @@ import org.kakao.kakaoshopping.domain.service.inquiry.InquiryService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.common.paging.request.InquirySearchCondition;
 import org.kakao.kakaoshopping.web.dto.inquiry.request.CreateInquiry;
+import org.kakao.kakaoshopping.web.dto.inquiry.request.EditInquiry;
 import org.kakao.kakaoshopping.web.dto.inquiry.response.InquiryDetailView;
 import org.kakao.kakaoshopping.web.dto.inquiry.response.InquirySimpleView;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.RequiredArgsConstructor;
@@ -98,5 +100,20 @@ public class InquiryController {
 		inquiryService.deleteInquiry(inquiryId);
 
 		return "redirect:/inquiries";
+	}
+
+	/**
+	 * 기능 : 상품 문의 게시글 수정하는 메소드
+	 * 작성자 - 임창준
+	 * 작성일 - 2023.07.26
+	 * @param editInquiry
+	 * @param inquiryId
+	 * @return
+	 */
+	@PutMapping("/inquiry/edit")
+	public String editInquiry(EditInquiry editInquiry, Long inquiryId) {
+		inquiryService.editInquriy(inquiryId, editInquiry);
+
+		return "redirect:/inquiry/detail";
 	}
 }
