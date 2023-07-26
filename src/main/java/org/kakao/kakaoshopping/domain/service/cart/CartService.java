@@ -13,10 +13,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CartService {
     private final CartRepository cartRepository;
     private final UserService userService;
@@ -24,7 +26,6 @@ public class CartService {
     private final MessageSource messageSource;
 
     // 장바구니 초기 추가
-    @Transactional
     public void addCart(Cart cart, Long itemId, Long userId) {
         User user = userService.findUser(userId);
         Item item = itemService.getItemComplex(itemId);
@@ -34,14 +35,17 @@ public class CartService {
     }
 
     // 장바구니 수량 업데이트
-    @Transactional
-    public void updateCart(Long cartId, Cart cart) {
-        Cart findCart = findById(cartId);
+    public void updateCart(Cart cart) {
+        Cart findCart = findById(cart.getId());
         findCart.setQuantity(cart.getQuantity());
     }
 
+    public List<Cart> getItemsInCart(Long userId){
+        User user = userService.findUser(userId);
+        return cartRepository.findAllByUser(user);
+    }
+
     // 결제 시 장바구니 결제 여부 업데이트
-    @Transactional
     public void updateOrderStateCart(Long userId) {
         User user = userService.findUser(userId);
         cartRepository.findAllByUser(user)
@@ -49,15 +53,14 @@ public class CartService {
     }
 
     // 장바구니 삭제 (in DB)
-    @Transactional
-    public void deleteItemInCart(Long cartId) {
-        Cart cart = findById(cartId);
+    public void deleteItemInCart(Cart deleteCart) {
+        Cart cart = findById(deleteCart.getId());
         cartRepository.delete(cart);
     }
 
-    @Transactional
     public void deleteCart(Long userId) {
         User user = userService.findUser(userId);
+        cartRepository.deleteByUser(user);
     }
 
     private Cart findById(Long id) {

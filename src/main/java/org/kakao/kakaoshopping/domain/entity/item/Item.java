@@ -37,6 +37,14 @@ public class Item extends BaseEntity {
     @Setter
     private User seller;
 
+	public void update(Item editItem){
+		this.name = editItem.getName();
+		this.price = editItem.getPrice();
+		this.stock = editItem.getStock();;
+		this.imagePath = editItem.getImagePath();;
+		this.itemDetail = editItem.getItemDetail();;
+	}
+
 	@Builder
 	public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail, User seller) {
 		this.name = name;
@@ -54,5 +62,10 @@ public class Item extends BaseEntity {
 		this.stock = stock;
 		this.imagePath = imagePath;
 		this.itemDetail = itemDetail;
+	}
+
+	@Builder(builderMethodName = "byId")
+	public Item(Long id){
+		this.id = id;
 	}
 }
