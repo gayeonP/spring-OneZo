@@ -1,4 +1,4 @@
-package org.kakao.kakaoshopping.web.dto.member.login;
+package org.kakao.kakaoshopping.web.dto.user.login;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class LoggedInUser {
 	private final Long userId;
+	private String nickname;
 }

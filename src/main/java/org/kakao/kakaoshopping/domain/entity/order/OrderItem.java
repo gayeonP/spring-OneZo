@@ -26,6 +26,14 @@ import lombok.Setter;
 @Table(name = "ORDER_ITEM_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+/**
+ * 기능 : 주문 상품에 대한 엔티티
+ * 작성자 - 장원준
+ * 작성일 - 2023.07.20
+ * 수정자 - 임창준
+ * 수정일 - 2023.07.21
+ */
 public class OrderItem extends BaseEntity {
 
 	@Id

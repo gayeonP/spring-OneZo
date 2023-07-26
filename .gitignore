@@ -40,3 +40,6 @@ out/
 /gradlew
 /gradle/wrapper/gradle-wrapper.properties
 /gradle/wrapper/gradle-wrapper.jar
+
+src/main/generated/org/kakao/kakaoshopping/domain/entity/*
+

@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// 회원이 프론트에서 form에 작성한 데이터를 가져와서 엔티티로 바꿈
 public class CreateOrder {
 
 	private String zipCode;
