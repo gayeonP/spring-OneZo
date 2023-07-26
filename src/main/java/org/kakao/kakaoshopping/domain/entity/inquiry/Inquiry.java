@@ -22,6 +22,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -58,4 +59,10 @@ public class Inquiry extends BaseEntity {
 
 	@OneToMany(mappedBy = "inquiry", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<InquiryComment> comments = new ArrayList<>();
+
+	@Builder
+	public Inquiry(String title, String contents) {
+		this.title = title;
+		this.contents = contents;
+	}
 }
