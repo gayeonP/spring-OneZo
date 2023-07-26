@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
+            <a class="navbar-brand text-success logo h1 align-self-center" th:href="@{/}">
                 205번가
             </a>
 
@@ -31,8 +31,18 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <a class="nav-link-custom" style="font-weight: bold" href="login.html">로그인</a>
-                    <a class="nav-link-custom" href="join.html">회원가입</a>
+                    <th:block th:if="${session.loggedInUser==null}">
+                        <a class="nav-link-custom" style="font-weight: bold" th:href="@{/login}">로그인</a>
+                        <a class="nav-link-custom" th:href="@{/join}">회원가입</a>
+                    </th:block>
+                    <th:block th:unless="${session.loggedInUser==null}">
+                        <!--                        <a class="nav-link-custom" th:href="@{/user/mypage}"-->
+                        <!--                           th:text="${session.loggedInUser.getNickname()}">nickname</a>-->
+                        <form th:action="@{/logout}" method="get" class="d-inline">
+                            <button type="submit" class="nav-link-custom">로그아웃</button>
+                        </form>
+                        <a class="nav-link-custom" th:href="@{/join}">회원가입</a>
+                    </th:block>
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
                             <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
@@ -59,3 +69,4 @@
         </div>
     </nav>
 </header>
+</html>
