@@ -84,9 +84,11 @@ public class InquiryService {
 			.orElseThrow(() -> new InquiryNotFound(messageSource.getMessage("error.noInquiry", null, getDefault())));
 	}
 
-	public void editInquriy(Long inquiryId, EditInquiry editInquiry) {
-		Inquiry savedInquiry = inquiryRepository.findById(inquiryId).orElseThrow();
+	public Long editInquiry(Long inquiryId, EditInquiry editInquiry) {
+		Inquiry savedInquiry = findById(inquiryId);
 		savedInquiry.changeTitle(editInquiry.getTitle());
 		savedInquiry.changeContents(editInquiry.getContents());
+
+		return savedInquiry.getId();
 	}
 }
