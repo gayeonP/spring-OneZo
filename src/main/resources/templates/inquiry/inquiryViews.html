@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="|주문 목록|"/>
+    <th:block th:fragment="content">
+        <!-- Start Content Page -->
+        <div class="container-fluid py-5">
+            <div class="col-md-6 m-auto text-center">
+                <table class="table table-hover">
+                    <colgroup>
+                        <col width="2%"/>
+                        <col width="20%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <th:block th:each="inquiry, userStat : ${inquiries}">
+                        <tr th:onclick="'detail(\'' + ${inquiry.id} + '\')'">
+                            <td>[[${userStat.count}]]</td>
+                            <td>[[${inquiry.title}]]</td>
+                            <td>[[${inquiry.username}]]</td>
+                            <td>[[${inquiry.commentSize}]]</td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+    function detail(inquiryId) {
+        window.location.href = '/inquiry/detail?inquiryId=' + inquiryId;
+    }
+</script>

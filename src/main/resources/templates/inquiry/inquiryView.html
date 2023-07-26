@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="|상품 문의 내용|"/>
+    <th:block th:fragment="content">
+        <!-- Start Contact -->
+        <div class="container py-5">
+            <div class="row py-5">
+                <div class="mb-3">
+                    <label>제목</label>
+                    <div class="col mt-2">
+                        <p>[[${inquiry.title}]]</p>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>문의 내용</label>
+                    <div class="col mt-2">
+                        <p>[[${inquiry.contents}]]</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-xl-end mt-2">
+                        <button type="submit" class="btn btn-primary btn-lg px-3"
+                                th:onclick="'editInquiry(\'' + ${inquiry.id} + '\')'">
+                            수정하기
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-lg px-3"
+                                th:onclick="'deleteInquiry(\'' + ${inquiry.id} + '\')'">
+                            삭제하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+    function editInquiry(inquiryId) {
+        window.location.href = '/inquiry/edit?inquiryId=' + inquiryId;
+    }
+
+    function deleteInquiry(inquiryId) {
+        window.location.href = '/inquiry/delete?inquiryId=' + inquiryId;
+    }
+</script>
