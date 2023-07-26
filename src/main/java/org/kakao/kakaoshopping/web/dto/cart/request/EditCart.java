@@ -10,6 +10,7 @@ import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 @AllArgsConstructor
 public class EditCart {
     private Integer quantity;
+    private Long cartId;
 
     public Cart toEntity() {
         return Cart.toEdit()

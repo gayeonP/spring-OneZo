@@ -1,29 +1,25 @@
 package org.kakao.kakaoshopping.web.controller.cart;
 
-import lombok.RequiredArgsConstructor;
-import org.kakao.kakaoshopping.domain.entity.cart.Cart;
-import org.kakao.kakaoshopping.domain.service.cart.CartService;
-import org.kakao.kakaoshopping.web.annotaion.LoginUser;
-import org.kakao.kakaoshopping.web.dto.cart.request.CreateCart;
-import org.kakao.kakaoshopping.web.dto.cart.request.EditCart;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.servlet.http.HttpServletRequest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@Controller
-@RequestMapping("/user")
-@RequiredArgsConstructor
-public class CartController {
-
-    private final CartService cartService;
-
-    // 장바구니 담기
-    @PostMapping("/createCart")
+@SpringBootTest
+@AutoConfigureWebMvc
+class CartControllerTest {
+//
+//    @Autowired
+//    MockMvc mvc;
+/*
+@PostMapping("/createCart")
     public String createCart(CreateCart createCart, Long itemId, @LoginUser LoggedInUser loggedInUser) {
         cartService.addCart(createCart.toEntity(), itemId, loggedInUser.getUserId());
         return "redirect:/user/carts";
@@ -39,22 +35,24 @@ public class CartController {
 
     // 장바구니 안 아이템 삭제
     @PostMapping("/deleteItemInCart")
-    public String deleteItemInCart(EditCart cart) {
+    public String deleteItemInCart(EditCart cart){
         cartService.deleteItemInCart(cart.toEntity());
         return "redirect:/user/carts";
     }
 
-    // 장바구니 자체 삭제
+    // 장바구니 체 자삭제
     @PostMapping("/deleteCart")
     public String deleteCart(@LoginUser LoggedInUser loggedInUser) {
         cartService.deleteCart(loggedInUser.getUserId());
         return "redirect:/user/carts";
     }
-
-    // 장바구니 수량 업데이트
+        //
     @PostMapping("/updateQuantityCart")
-    public String updateQuantityCart(EditCart editCart) {
+    public String updateQuantityCart(EditCart editCart){
         cartService.updateCart(editCart.toEntity());
         return "redirect:/user/carts";
     }
+ */
+
+
 }

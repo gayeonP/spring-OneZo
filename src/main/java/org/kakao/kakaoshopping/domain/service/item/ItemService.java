@@ -75,7 +75,7 @@ public class ItemService {
     public Item editItem(Item editItem, Long itemId) {
         // TODO login 기능 완성 후 추가 수정 있을 수 있음
         Item item = findById(itemId);
-        item.editItem(editItem);
+        item.update(editItem);
         return item;
     }
 
