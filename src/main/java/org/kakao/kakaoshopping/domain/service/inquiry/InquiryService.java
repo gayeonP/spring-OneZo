@@ -28,7 +28,7 @@ public class InquiryService {
 	/**
 	 * 기능 : 게시판글을 생성하는 서비스 메소드.
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param inquiry
 	 * @param userId
 	 * @return
@@ -45,7 +45,7 @@ public class InquiryService {
 	/**
 	 * 기능 : 문의게시글의 상세 정보를 가져오는 서비스 메소드.
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * * @param id
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class InquiryService {
 	/**
 	 * 기능 : 문의게시글을 페이징 처리하여 가져와 조회하는 메소드
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param condition
 	 * @return
 	 */
