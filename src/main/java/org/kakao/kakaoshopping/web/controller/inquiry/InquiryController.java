@@ -30,7 +30,7 @@ public class InquiryController {
 	/**
 	 * 기능 : 상품문의 게시글의 리스트를 가져오는 메소드.
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param loggedInUser
 	 * @param condition
 	 * @param model
@@ -53,7 +53,7 @@ public class InquiryController {
 	/**
 	 * 기능 : 상품문의 게시글을 생성하는 메소드
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param createInquiry
 	 * @param loginUser
 	 * @param rttr
@@ -73,7 +73,7 @@ public class InquiryController {
 	/**
 	 * 기능 : 상품 문의의 상세정보를 보여주는 메소드
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param inquiryId
 	 * @param model
 	 * @return
@@ -91,7 +91,7 @@ public class InquiryController {
 	/**
 	 * 기능 : 상품 문의를 삭제하는 메소드
 	 * 작성자 - 임창준
-	 * 작성일 - 2020.07.25
+	 * 작성일 - 2023.07.25
 	 * @param inquiryId
 	 * @return
 	 */
