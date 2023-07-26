@@ -65,4 +65,12 @@ public class Inquiry extends BaseEntity {
 		this.title = title;
 		this.contents = contents;
 	}
+
+	public void changeTitle(String title) {
+		this.title = title;
+	}
+
+	public void changeContents(String contents) {
+		this.contents = contents;
+	}
 }
