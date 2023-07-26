@@ -9,16 +9,34 @@
             <h2>회원가입</h2>
             <form>
                 <div class="mb-3">
-                    <label for="username" class="form-label">사용자 이름</label>
-                    <input type="text" class="form-control" id="username" placeholder="사용자 이름을 입력하세요">
+                    <label for="userId" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="userId" required maxlength="20">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">이메일 주소</label>
-                    <input type="email" class="form-control" id="email" placeholder="이메일 주소를 입력하세요">
+                    <label for="password" class="form-label">패스워드</label>
+                    <input type="password" class="form-control" id="password" required maxlength="30">
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" required maxlength="10">
+                </div>
+                <div class="mb-3">
+                    <label for="nickname" class="form-label">닉네임</label>
+                    <input type="text" class="form-control" id="nickname" required maxlength="10">
+                </div>
+                <div class="mb-3">
+                    <label for="headNumber" class="form-label">전화번호</label>
+
+                    <input type="number" style="border-color: lightgray" id="headNumber" required maxlength="3">-
+                    <input type="number" style="border-color: lightgray" id="middleNumber" required maxlength="4">-
+                    <input type="number" style="border-color: lightgray" id="tailNumber" required maxlength="4">
+                </div>
+                <div class="mb-3">
+                    <label for="userType">Role</label>
+                    <select id="userType" name="userType" required>
+                        <option value="USER">USER</option>
+                        <option value="SELLER">SELLER</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">가입하기</button>
             </form>

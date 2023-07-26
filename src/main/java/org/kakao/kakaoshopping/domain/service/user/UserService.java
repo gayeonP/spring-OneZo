@@ -2,6 +2,7 @@ package org.kakao.kakaoshopping.domain.service.user;
 
 import static java.util.Locale.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.kakao.kakaoshopping.domain.entity.user.User;
@@ -31,6 +32,10 @@ public class UserService {
 			.orElseThrow(() -> new UserNotFound(messageSource.getMessage("error.noUser", null, getDefault())));
 	}
 
+	public List<User> findAllUser() {
+		return userRepository.findAll();
+	}
+
 	public LoggedInUser login(LoginUser loginUser) {
 
 		String userId = loginUser.getUserId();
@@ -45,5 +50,9 @@ public class UserService {
 		}
 
 		return null;
+	}
+
+	public Long createUser(User user) {
+		return userRepository.save(user).getId();
 	}
 }
