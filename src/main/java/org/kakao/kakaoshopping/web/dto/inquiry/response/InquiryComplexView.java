@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class InquiryDetailView {
+public class InquiryComplexView {
 	// 게시물 Id
 	private Long id;
 	// 작성자 Id
@@ -17,7 +17,7 @@ public class InquiryDetailView {
 	// 글 내용
 	private String contents;
 
-	public InquiryDetailView(Inquiry inquiry) {
+	public InquiryComplexView(Inquiry inquiry) {
 		this.id = inquiry.getId();
 		this.userId = inquiry.getUser().getId();
 		this.title = inquiry.getTitle();
