@@ -17,14 +17,14 @@ import lombok.NoArgsConstructor;
  */
 public class PhoneNumber {
 
-    @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
-    private String headNumber;
+	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
+	private String headNumber;
 
-    @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
-    private String middleNumber;
+	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
+	private String middleNumber;
 
-    @Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
-    private String tailNumber;
+	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)
+	private String tailNumber;
 
     @Builder
     public PhoneNumber(String headNumber, String middleNumber, String tailNumber) {
