@@ -37,7 +37,7 @@ public class CartController {
 	@GetMapping("/carts")
 	public String viewCarts(Model model, @LoginUser LoggedInUser loggedInUser) {
 		List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
-		model.addAttribute("items", carts);
+		model.addAttribute("carts", carts);
 		return "/cartViews";
 	}
 
