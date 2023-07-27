@@ -18,12 +18,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class ItemComplexView {
+    private Long id;
     private String name;
     private BigDecimal price;
     private Integer stock;
     private String imagePath;
     private String itemDetail;
     private String sellerName;
+    private Long sellerId;
 
     public ItemComplexView(Item item) {
         this.name = item.getName();
@@ -32,5 +34,7 @@ public class ItemComplexView {
         this.price = item.getPrice();
         this.stock = item.getStock();
         this.sellerName = item.getSeller().getName();
+        this.sellerId = item.getSeller().getId();
+        this.id = item.getId();
     }
 }

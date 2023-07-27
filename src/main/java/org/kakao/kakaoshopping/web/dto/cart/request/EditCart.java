@@ -5,6 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 
+/**
+ * 기능 : 수정한 장바구니 아이템 수량을 담기 위한 DTO
+ * 작성자 - 장규민
+ * 작성일 - 2023.07.25
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

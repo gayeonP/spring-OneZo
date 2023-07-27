@@ -57,6 +57,7 @@ public class UserService {
 
 		if (user.isPresent() && user.get().getPassword().equals(password)) {
 			return LoggedInUser.builder()
+					.userType(user.get().getUserType())
 				.userId(user.get().getId())
 				.nickname(user.get().getNickname())
 				.build();

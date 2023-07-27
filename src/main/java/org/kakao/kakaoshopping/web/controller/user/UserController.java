@@ -63,7 +63,6 @@ public class UserController {
 
 			return "user/join";
 		}
-
 		userService.createUser(createUser.toEntity());
 		return "redirect:/joinSuccess";
 	}
