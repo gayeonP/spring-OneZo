@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class CreateUser {
 
 	@NotBlank(message = "아이디를 입력해주세요.")
-	@Pattern(regexp = "^[a-zA-Z0-9]{6,20}$", message = "아이디는 영문과 숫자를 포함한 6~20자리여야 합니다.")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-z]).{6,20}$", message = "아이디는 영문과 숫자를 포함한 6~20자리여야 합니다.")
 	private String userLoginId;
 
 	@NotBlank(message = "패스워드를 입력해주세요.")

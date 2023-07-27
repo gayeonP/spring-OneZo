@@ -1,14 +1,15 @@
 package org.kakao.kakaoshopping.web.dto.item.request;
 
+import java.math.BigDecimal;
+
+import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.kakao.kakaoshopping.domain.entity.user.User;
+
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.kakao.kakaoshopping.domain.entity.item.Item;
-import org.kakao.kakaoshopping.domain.entity.user.User;
-
-import java.math.BigDecimal;
 
 /**
  * 기능 : 새로운 상품을 등록하기 위한 DTO
@@ -20,25 +21,26 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateItem {
-    @NotEmpty
-    private String name;
+	@NotEmpty
+	private String name;
 
-    private BigDecimal price;
+	private BigDecimal price;
 
-    private Integer stock;
+	private Integer stock;
 
-    private String itemDetail;
+	private String itemDetail;
 
-    private User seller;
+	private User seller;
 
-    public Item toEntity() {
-        return Item.builder()
-                .name(name)
-                .price(price)
-                .stock(stock)
-                .imagePath("https://cdn.011st.com/11dims/resize/300/11src/product/5931662112/L300.jpg?708000000")
-                .itemDetail(itemDetail)
-                .seller(seller)
-                .build();
-    }
+	public Item toEntity() {
+		return Item.builder()
+			.name(name)
+			.price(price)
+			.stock(stock)
+			.imagePath(
+				"https://newsimg.sedaily.com/2021/04/08/22L06CUBC8_2.png")
+			.itemDetail(itemDetail)
+			.seller(seller)
+			.build();
+	}
 }

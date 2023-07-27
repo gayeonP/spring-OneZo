@@ -91,7 +91,8 @@
                         <div class="col-md-4" th:each="item: ${items.getList()}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid" th:src="${item.getImagePath()}">
+                                    <img class="card-img rounded-0 img-fluid" th:if="${item.getImagePath()==null}" src="https://newsimg.sedaily.com/2021/04/08/22L06CUBC8_2.png">
+                                    <img class="card-img rounded-0 img-fluid" th:unless="${item.getImagePath()==null}" th:src="${item.getImagePath()}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white" href="itemView.html"><i

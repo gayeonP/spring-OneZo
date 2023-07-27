@@ -36,8 +36,12 @@ public class UserController {
 
 	@GetMapping("/join")
 	public String createUserForm() {
-
 		return "user/join";
+	}
+
+	@GetMapping("/join/proc")
+	public String createUserProcForm() {
+		return "user/joinProc";
 	}
 
 	/**
@@ -51,7 +55,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("/join")
+	@PostMapping(value = {"/join", "/join/proc"})
 	public String createUser(@Valid CreateUser createUser, Errors errors, Model model) {
 
 		if (errors.hasErrors()) {
@@ -61,7 +65,7 @@ public class UserController {
 			validResult.forEach(
 				(key, value) -> model.addAttribute(key, value));
 
-			return "user/join";
+			return "user/joinProc";
 		}
 		userService.createUser(createUser.toEntity());
 		return "redirect:/joinSuccess";
