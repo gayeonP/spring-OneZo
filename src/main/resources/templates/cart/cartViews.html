@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 
 <th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문상세"/>
+    <title th:text="장바구니"/>
     <th:block th:fragment="content">
         <!-- Modal -->
         <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
@@ -32,27 +32,35 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Sample cart items -->
+
                             <form id="cart-form">
                                 <ul class="list-group" id="cart-items">
                                     <!-- Existing cart item, modify accordingly -->
+                                    <th:block th:each="cart : ${carts}">
                                     <li class="list-group-item">
                                         <div class="product-info">
                                             <input type="checkbox" class="item-checkbox" id="item1" name="item1">
                                             <img src="product1.jpg" alt="Product 1" class="product-image">
-                                            <span class="product-name">Product 1</span>
-                                            <span class="product-quantity">1</span>
-                                            <span class="product-price">29.99</span>
+                                            <span class="product-name" th:text="${cart.name}"
+                                            ></span>
+                                            <span class="product-quantity" th:text="${cart.quantity}"
+                                            ></span>
+                                            <span class="product-price" th:text="${cart.price}">
+                                            </span>
                                             <button class="btn btn-sm btn-success btn-add">+</button>
                                             <button class="btn btn-sm btn-danger btn-sub">-</button>
                                             <button class="btn btn-sm btn-remove-item">X</button>
                                         </div>
                                     </li>
+                                    </th:block>
                                     <!-- Add checkboxes and modify other items similarly -->
                                 </ul>
                                 <div class="mt-4">
                                     <strong>Total Price:</strong> $<span id="total-price">0</span>
                                 </div>
-                                <button class="btn btn-primary mt-3" id="checkout-btn">Checkout</button>
+                                <button class="btn btn-primary mt-3" id="checkout-btn"
+                                        th:onclick="'createOrder(\'' + ${cart.id} + '\')'">
+                                    Checkout</button>
                             </form>
                         </div>
                     </div>
@@ -66,4 +74,8 @@
     </th:block>
 </th:block>
 
-
+<script th:inline="javascript">
+    function createOrder() {
+        window.location.href = '/order/create';
+    }
+</script>

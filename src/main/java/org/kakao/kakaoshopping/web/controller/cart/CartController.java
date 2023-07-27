@@ -6,7 +6,8 @@ import org.kakao.kakaoshopping.domain.service.cart.CartService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.dto.cart.request.CreateCart;
 import org.kakao.kakaoshopping.web.dto.cart.request.EditCart;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
+import org.kakao.kakaoshopping.web.dto.cart.response.CartSimpleView;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +33,11 @@ public class CartController {
     // 장바구니 목록 보여주기
     @GetMapping("/carts")
     public String viewCarts(Model model, @LoginUser LoggedInUser loggedInUser) {
-        List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
-        model.addAttribute("items", carts);
+        List<CartSimpleView> carts = cartService.getItemsInCart(loggedInUser.getUserId()).stream()
+            .map(CartSimpleView::new)
+            .toList();
+
+        model.addAttribute("cart", carts);
         return "/cartViews";
     }
 

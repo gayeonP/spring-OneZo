@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문등록"/>
+    <th:block th:fragment="content">
+        <form th:action="@{/submitOrder}" method="post">
+            <label for="zipCode">우편번호:</label>
+            <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}" required>
+            <br>
+
+            <label for="city">도시:</label>
+            <input type="text" id="city" name="city" th:field="*{city}" required>
+            <br>
+
+            <label for="street">도로명:</label>
+            <input type="text" id="street" name="street" th:field="*{street}" required>
+            <br>
+
+            <label for="headNumber">전화번호 앞자리:</label>
+            <input type="text" id="headNumber" name="headNumber" th:field="*{headNumber}" required>
+            <br>
+
+            <label for="middleNumber">전화번호 중간자리:</label>
+            <input type="text" id="middleNumber" name="middleNumber" th:field="*{middleNumber}" required>
+            <br>
+
+            <label for="tailNumber">전화번호 뒷자리:</label>
+            <input type="text" id="tailNumber" name="tailNumber" th:field="*{tailNumber}" required>
+            <br>
+
+            <label for="deliveryRequest">배송 요청사항:</label>
+            <textarea id="deliveryRequest" name="deliveryRequest" th:field="*{deliveryRequest}"></textarea>
+            <br>
+
+            <label for="payment">결제 수단:</label>
+            <select id="payment" name="payment" th:field="*{payment}" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="CREDIT_CARD">신용카드</option>
+                <option value="BANK_TRANSFER">계좌이체</option>
+                <option value="CASH">현금</option>
+            </select>
+            <br>
+
+            <label>주문 품목:</label>
+            <table>
+                <tr th:each="orderItem, itemStat : *{orderItems}">
+                    <td>
+                        <input type="text" th:field="*{orderItems[__${itemStat.index}__].itemName}" required>
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{orderItems[__${itemStat.index}__].quantity}" required>
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{orderItems[__${itemStat.index}__].price}" required>
+                    </td>
+                </tr>
+            </table>
+
+            <button type="submit">주문하기</button>
+        </form>
+    </th:block>
+</th:block>

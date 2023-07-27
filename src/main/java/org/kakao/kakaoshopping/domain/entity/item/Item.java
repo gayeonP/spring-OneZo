@@ -37,12 +37,12 @@ public class Item extends BaseEntity {
     @Setter
     private User seller;
 
-	public void update(Item editItem){
+	public void update(Item editItem) {
 		this.name = editItem.getName();
 		this.price = editItem.getPrice();
-		this.stock = editItem.getStock();;
-		this.imagePath = editItem.getImagePath();;
-		this.itemDetail = editItem.getItemDetail();;
+		this.stock = editItem.getStock();
+		this.imagePath = editItem.getImagePath();
+		this.itemDetail = editItem.getItemDetail();
 	}
 
 	@Builder
