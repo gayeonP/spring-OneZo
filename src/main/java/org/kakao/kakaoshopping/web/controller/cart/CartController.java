@@ -8,11 +8,14 @@ import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.dto.cart.request.CreateCart;
 import org.kakao.kakaoshopping.web.dto.cart.request.EditCart;
 import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,9 +43,10 @@ public class CartController {
 
 	// 장바구니 안 아이템 삭제
 	@PostMapping("/deleteItemInCart")
-	public String deleteItemInCart(EditCart cart) {
+	@ResponseBody
+	public ResponseEntity<Void> deleteItemInCart(@RequestBody EditCart cart) {
 		cartService.deleteItemInCart(cart.toEntity());
-		return "redirect:/user/carts";
+		return ResponseEntity.ok().build();
 	}
 
 	// 장바구니 자체 삭제
@@ -54,9 +58,10 @@ public class CartController {
 
 	// 장바구니 수량 업데이트
 	@PostMapping("/updateQuantityCart")
-	public String updateQuantityCart(EditCart editCart) {
-		cartService.updateCart(editCart.toEntity());
-		return "redirect:/user/carts";
+	@ResponseBody
+	public ResponseEntity<Integer> updateQuantityCart(@RequestBody EditCart editCart) {
+		Integer savedQuantity = cartService.updateCart(editCart.toEntity());
+		return ResponseEntity.ok(savedQuantity);
 	}
 
 	@GetMapping("/test")
