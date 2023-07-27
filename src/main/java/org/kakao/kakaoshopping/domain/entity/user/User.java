@@ -51,10 +51,11 @@ public class User extends BaseEntity {
 	private UserType userType;
 
 	@Builder
-	public User(String email, String userId, String password, String name, String nickname, PhoneNumber phoneNumber,
+	public User(String email, String userLoginId, String password, String name, String nickname,
+		PhoneNumber phoneNumber,
 		UserType userType) {
 		this.email = email;
-		this.userId = userId;
+		this.userId = userLoginId;
 		this.password = password;
 		this.name = name;
 		this.nickname = nickname;
