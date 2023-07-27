@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 
 <th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문상세"/>
+    <title th:text="205번가"/>
     <th:block th:fragment="content">
         <!-- Modal -->
         <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
@@ -30,14 +30,15 @@
             <ol class="carousel-indicators">
                 <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
                 <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
-                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="container">
                         <div class="row p-5">
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="../static/img/banner_img_01.jpg" alt="">
+                                <img class="img-fluid"
+                                     src="https://image.zdnet.co.kr/2023/06/20/fc3e79bc5f156e917dc92b2b8758c1d1.jpg"
+                                     alt="">
                             </div>
                             <div class="col-lg-6 mb-0 d-flex align-items-center">
                                 <div class="text-align-left align-self-center">
@@ -56,38 +57,16 @@
                     <div class="container">
                         <div class="row p-5">
                             <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="../static/img/banner_img_02.jpg" alt="">
+                                <img class="img-fluid"
+                                     src="https://cdn.011st.com/11dims/resize/300/11src/dl/v2/2/7/4/5/0/3/HAten/2423274503_148626444_05.jpg"
+                                     alt="">
                             </div>
                             <div class="col-lg-6 mb-0 d-flex align-items-center">
                                 <div class="text-align-left">
-                                    <h1 class="h1">Proident occaecat</h1>
-                                    <h3 class="h2">Aliquip ex ea commodo consequat</h3>
+                                    <h1 class="h1">제주농협 하우스감귤</h1>
+                                    <h3 class="h2">[농협카드15%]</h3>
                                     <p>
-                                        You are permitted to use this Zay CSS template for your commercial websites.
-                                        You are <strong>not permitted</strong> to re-distribute the template ZIP file in
-                                        any
-                                        kind of template collection websites.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container">
-                        <div class="row p-5">
-                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                                <img class="img-fluid" src="../static/img/banner_img_03.jpg" alt="">
-                            </div>
-                            <div class="col-lg-6 mb-0 d-flex align-items-center">
-                                <div class="text-align-left">
-                                    <h1 class="h1">Repr in voluptate</h1>
-                                    <h3 class="h2">Ullamco laboris nisi ut </h3>
-                                    <p>
-                                        We bring you 100% free CSS templates for your websites.
-                                        If you wish to support TemplateMo, please make a small contribution via PayPal
-                                        or tell
-                                        your friends about our website. Thank you.
+                                        오늘 주문 내일 도착!
                                     </p>
                                 </div>
                             </div>
@@ -119,22 +98,22 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="../static/img/category_img_01.jpg"
-                                     class="rounded-circle img-fluid border"></a>
-                    <h5 class="text-center mt-3 mb-3">Watches</h5>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                    <a th:href="@{/item(itemId=25)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/dl/23/9/6/9/4/8/9/qsQqk/5997969489_148625188_05.jpg"
+                            class="rounded-circle img-fluid border"></a>
+                    <h5 class="text-center mt-3 mb-3">Cloth</h5>
                 </div>
                 <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="../static/img/category_img_02.jpg"
-                                     class="rounded-circle img-fluid border"></a>
-                    <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                    <a th:href="@{/item(itemId=8)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/product/5609836062/L300.jpg?377000000"
+                            class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3">food</h2>
                 </div>
                 <div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="#"><img src="../static/img/category_img_03.jpg"
-                                     class="rounded-circle img-fluid border"></a>
-                    <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
-                    <p class="text-center"><a class="btn btn-success">Go Shop</a></p>
+                    <a th:href="@{/item(itemId=21)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/dl/23/1/2/2/2/0/6/kkyLK/5753122206_148581635_05.png"
+                            class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3">gift card</h2>
                 </div>
             </div>
         </section>
@@ -148,15 +127,16 @@
                     <div class="col-lg-6 m-auto">
                         <h1 class="h1">획기적인 상품</h1>
                         <p>
-                            획기적인 상품이다 알아서 봐라 사고싶으면 사던지ㅋ
+                            획기적인 이벤트 중인 상품입니다.
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
-                            <a href="item/shop-single.html">
-                                <img src="../static/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                            <a th:href="@{/item(itemId=24)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/product/3895642295/L300.jpg?349000000"
+                                     class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -170,10 +150,10 @@
                                     `
                                     <li class="text-muted text-right">$240.00</li>
                                 </ul>
-                                <a href="item/shop-single.html" class="h2 text-decoration-none text-dark">Gym Weight</a>
+                                <a th:href="@{/item(itemId=24)}" class="h2 text-decoration-none text-dark">씨그램 350mL
+                                    30개</a>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia
-                                    deserunt.
+                                    160년 전통의 브랜드 씨그램에서 선보이는 상쾌한 Flavored Sparkling Water!
                                 </p>
                                 <p class="text-muted">Reviews (24)</p>
                             </div>
@@ -181,8 +161,9 @@
                     </div>
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
-                            <a href="item/shop-single.html">
-                                <img src="../static/img/feature_prod_02.jpg" class="card-img-top" alt="...">
+                            <a th:href="@{/item(itemId=22)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/product/5820621041/L300.jpg?312000000"
+                                     class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -195,12 +176,11 @@
                                     </li>
                                     <li class="text-muted text-right">$480.00</li>
                                 </ul>
-                                <a href="item/shop-single.html" class="h2 text-decoration-none text-dark">Cloud Nike
-                                    Shoes</a>
+                                <a th:href="@{/item(itemId=22)}" class="h2 text-decoration-none text-dark">베베숲 시그니처 그린
+                                    20개</a>
                                 <p class="card-text">
-                                    Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed,
-                                    commodo
-                                    ullamcorper.
+                                    물티슈는 베베숲만 써요그린 블루 베이지 다 써봤는데 크게 차이 없어서 할인하면 그냥 뜬 제품 바로 20개씩 쟁여놔요~청소든 뭐든 다 도톰해서 좋고
+                                    물기도 촉촉해서 좋아요 간혹 2-3장씩 나올때도 있지만~~ 다시 넣어둬요;;
                                 </p>
                                 <p class="text-muted">Reviews (48)</p>
                             </div>
@@ -208,8 +188,9 @@
                     </div>
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
-                            <a href="item/shop-single.html">
-                                <img src="../static/img/feature_prod_03.jpg" class="card-img-top" alt="...">
+                            <a th:href="@{/item(itemId=20)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/dl/v2/1/7/2/0/4/2/DQBUM/6006172042_148602964_05.jpg"
+                                     class="card-img-top" alt="...">
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -222,12 +203,11 @@
                                     </li>
                                     <li class="text-muted text-right">$360.00</li>
                                 </ul>
-                                <a href="item/shop-single.html" class="h2 text-decoration-none text-dark">Summer Addides
-                                    Shoes</a>
+                                <a th:href="@{/item(itemId=20)}" class="h2 text-decoration-none text-dark">리솜 3개지점 성수기
+                                    얼리버드 판매</a>
                                 <p class="card-text">
-                                    Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et
-                                    scelerisque
-                                    ipsum lobortis nec.
+                                    비가 와서 춥다보니 외부에선 못놀고 내부에서만 놀았는데 물도 따뜻하고 재밌게 잘 놀았네요 이용객들 많았지만 안내하는 직원도 많고 유도도 잘 해주셔서
+                                    불편함 없이 잘 이용했네요
                                 </p>
                                 <p class="text-muted">Reviews (74)</p>
                             </div>
