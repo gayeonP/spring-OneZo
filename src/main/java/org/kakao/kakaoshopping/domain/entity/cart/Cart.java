@@ -2,22 +2,13 @@ package org.kakao.kakaoshopping.domain.entity.cart;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
 import org.kakao.kakaoshopping.domain.entity.annotation.CustomCreateDate;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
 import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,6 +41,7 @@ public class Cart {
 	private Integer quantity;
 
 	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
+	@Enumerated(EnumType.STRING)
 	@Setter
 	private OrderStatus orderStatus;
 

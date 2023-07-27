@@ -18,17 +18,20 @@
                                     <th:block th:each="cart, userStat : ${carts}">
                                         <ul class="list-group mb-3 cart" id="cart-items1">
                                             <!-- Existing cart item, modify accordingly -->
-                                            <input type="hidden" name="cartId" th:value="${cart.id}">
+                                            <input type="hidden" name="cartId" th:value="${cart.cartId}">
                                             <li class="list-group-item">
                                                 <div class="product-info"
                                                      style="justify-content: flex-start; display: flex;">
                                                     <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
-                                                    <div class="image-box" style="width: 30%">
-                                                        <img th:src="${cart.imagePath}" class="product-image">
+                                                    <div class="image-box p-1" style="width: 30%">
+                                                        <img th:src="${cart.getImagePath()}" class="product-image"
+                                                             style="display:block;
+                                                            width:100%;
+                                                            height:auto;">
                                                     </div>
                                                     <div style="width: 70%; display: flex; flex-direction: column">
                                                         <div class="p-3">
-                                                            <span class="product-name fa-lg">[[${cart.itemName}]]</span>
+                                                            <span class="product-name fa-lg">[[${cart.name}]]</span>
                                                         </div>
                                                         <div class="p-3">
                                                             단가 :
@@ -39,7 +42,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="p-3">
-                                                            총 가격 : <span th:id="itemTotalPrice${cart.itemId}"
+                                                            총 가격 : <span th:id="'itemTotalPrice' + ${cart.itemId}"
                                                                          class="product-price">[[${cart.price * cart.quantity}]]</span>원
                                                         </div>
                                                         <div class="col-auto p-3"
@@ -48,14 +51,14 @@
                                                                 <ul class="list-inline">
                                                                     <li class="list-inline-item text-right">
                                                                         수량
-                                                                        <input type="hidden" t
-                                                                               th:id="quantity${cart.itemId}"
+                                                                        <input type="hidden"
+                                                                               th:id="'quantity' + ${cart.itemId}"
                                                                                th:name="quantity">
                                                                     </li>
                                                                     <li class="list-inline-item">
                                                                         <span class="btn btn-success"
                                                                               id="btn-minus"
-                                                                              th:onclick="'minusQuantity(\'' + ${cart.id} + '\')'">-</span>
+                                                                              th:onclick="'minusQuantity(\'' + ${cart.cartId} + '\')'">-</span>
                                                                     </li>
                                                                     <li class="list-inline-item">
                                                                     <span class="badge bg-secondary"
@@ -64,14 +67,14 @@
                                                                     <li class="list-inline-item">
                                                                         <span class="btn btn-success"
                                                                               id="btn-plus"
-                                                                              th:onclick="'addQuantity(\'' + ${cart.id} + '\')'">>+</span>
+                                                                              th:onclick="'addQuantity(\'' + ${cart.cartId} + '\')'">+</span>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div>
                                                                 <button class="btn btn-danger text-xl-end"
-                                                                        th:onclick="'deleteCart(\'' + ${cart.id} + '\')'">
-                                                                    >삭제
+                                                                        th:onclick="'deleteCart(\'' + ${cart.cartId} + '\')'">
+                                                                    삭제
                                                                 </button>
                                                             </div>
                                                         </div>

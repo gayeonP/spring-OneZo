@@ -41,27 +41,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="h2" th:text="${item.getName()}"></h1>
-                                <p class="h3 py-2" th:text="${'₩' + item.getPrice()}"></p>
+                                <p class="h3 py-2" th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
                                 <p class="py-2">
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                    <span class="list-inline-item text-dark">평점 4.8 | 36 댓글 수</span>
                                 </p>
-                                <h6>Description:</h6>
+                                <h6>상품상세:</h6>
                                 <p th:text="${item.getItemDetail()}"></p>
-                                <h6>Stock:</h6>
+                                <h6>재고:</h6>
                                 <p th:text="${item.getStock()}"></p>
-                                <h6>Seller:</h6>
+                                <h6>판매자:</h6>
                                 <p th:text="${item.getSellerName()}"></p>
                                 <form method="POST" id="addCart">
                                     <div class="row">
                                         <div class="col-auto">
                                             <ul class="list-inline pb-3">
                                                 <li class="list-inline-item text-right">
-                                                    Quantity
+                                                    수량
                                                     <input type="hidden" name="quantity" id="quantity"
                                                            value="1">
                                                 </li>
@@ -78,13 +78,13 @@
                                         <div class="col d-grid">
                                             <button type="submit" class="btn btn-success btn-lg" name="submit"
                                                     value="buy" th:onclick="">
-                                                Buy
+                                                주문하기
                                             </button>
                                         </div>
                                         <div class="col d-grid">
                                             <button type="submit" class="btn btn-success btn-lg"
                                                     th:onclick="'addCart(\'' + ${item.getId()} + '\')'">
-                                                Add To Cart
+                                                장바구니
                                             </button>
                                         </div>
                                         <div class="col d-grid">

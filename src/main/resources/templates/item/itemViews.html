@@ -91,7 +91,7 @@
                         <div class="col-md-4" th:each="item: ${items.getList()}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid" th:src="${item.getImagePath()}">
+                                    <img class="card-img rounded-0 img-fluid" style="min-height: 212px" th:src="${item.getImagePath()}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white" href="itemView.html"><i
@@ -101,7 +101,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="min-height:15rem">
                                     <a th:href="${'/item?itemId=' + item.getId()}" class="h3 text-decoration-none"
                                        th:text="${item.getName()}"></a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">

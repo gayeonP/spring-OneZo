@@ -8,6 +8,7 @@ import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.dto.cart.request.CartToOrder;
 import org.kakao.kakaoshopping.web.dto.cart.request.CreateCart;
 import org.kakao.kakaoshopping.web.dto.cart.request.EditCart;
+import org.kakao.kakaoshopping.web.dto.cart.response.CartSimpleView;
 import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -56,8 +57,10 @@ public class CartController {
   @GetMapping("/carts")
   public String viewCarts(Model model, @LoginUser LoggedInUser loggedInUser) {
       List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
-      model.addAttribute("items", carts);
-      return "/cartViews";
+      List<CartSimpleView> cartSimpleView = carts.stream().map(CartSimpleView::new)
+                      .toList();
+      model.addAttribute("carts", cartSimpleView);
+      return "cart/cartViews";
   }
 
   /**
