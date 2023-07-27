@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 
+/**
+ * 기능 : 새로운 장바구니를 등록하기 위한 DTO
+ * 작성자 - 장규민
+ * 작성일 - 2023.07.25
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

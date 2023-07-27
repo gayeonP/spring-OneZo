@@ -9,7 +9,7 @@ import org.kakao.kakaoshopping.web.common.paging.request.InquirySearchCondition;
 import org.kakao.kakaoshopping.web.dto.inquiry.request.CreateInquiry;
 import org.kakao.kakaoshopping.web.dto.inquiry.response.InquiryDetailView;
 import org.kakao.kakaoshopping.web.dto.inquiry.response.InquirySimpleView;
-import org.kakao.kakaoshopping.web.dto.member.login.LoggedInUser;
+import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

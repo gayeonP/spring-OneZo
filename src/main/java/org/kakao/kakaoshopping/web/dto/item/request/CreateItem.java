@@ -36,7 +36,7 @@ public class CreateItem {
                 .name(name)
                 .price(price)
                 .stock(stock)
-                .imagePath("path")
+                .imagePath("https://cdn.011st.com/11dims/resize/300/11src/product/5931662112/L300.jpg?708000000")
                 .itemDetail(itemDetail)
                 .seller(seller)
                 .build();

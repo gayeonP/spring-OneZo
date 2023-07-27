@@ -29,8 +29,8 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/user/mypage")
-	public String myPage(@LoginUser LoggedInUser loginUser) {
-
-	}
+//	@GetMapping("/user/mypage")
+//	public String myPage(@LoginUser LoggedInUser loginUser) {
+//
+//	}
 }
