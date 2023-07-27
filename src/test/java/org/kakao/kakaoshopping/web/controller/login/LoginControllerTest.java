@@ -39,7 +39,7 @@ class LoginControllerTest {
 	@BeforeEach
 	void createUserRepositoryBeforeTest() {
 		User testUser = User.builder()
-			.userId("user1")
+			.userLoginId("user1")
 			.password("abcdefg")
 			.name("테스트")
 			.email("ljk@gg.net")

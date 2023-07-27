@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문상세"/>
+    <th:block th:fragment="content">
+        <div class="container mt-5">
+            <h3>회원가입 성공</h3>
+        </div>
+    </th:block>
+</th:block>
+
+</html>

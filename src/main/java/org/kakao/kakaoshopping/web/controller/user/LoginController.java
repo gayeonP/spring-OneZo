@@ -23,8 +23,20 @@ public class LoginController {
 		return "user/login";
 	}
 
+	/**
+	 * 기능 : 로그인
+	 * 작성자 - 임정규
+	 * 작성일 - 2023.07.25
+	 * 수정자 - 임정규
+	 * 수정일 - 2023.07.26
+	 * @param user
+	 * @param request
+	 * @param rttr
+	 * @return
+	 */
 	@PostMapping("/login")
 	public String login(LoginUser user, HttpServletRequest request, RedirectAttributes rttr) {
+
 		HttpSession session = request.getSession();
 
 		LoggedInUser login = userService.login(user);
@@ -38,6 +50,13 @@ public class LoginController {
 		return "redirect:/";
 	}
 
+	/**
+	 * 기능 : 로그아웃
+	 * 작성자 - 임정규
+	 * 작성일 - 2023.07.25
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
