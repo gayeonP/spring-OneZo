@@ -80,10 +80,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-6 pb-4">
-                            <form action="/seller/createItem">
+                        <div class="col-md-6 pb-4" style="text-align: right">
+                            <form action="/seller/createItem" >
                                 <button th:if="${session.loggedInUser != null && session.loggedInUser.getUserType().name().equals('SELLER')}"
-                                        type="submit" class="btn btn-primary" >상품등록</button>
+                                        type="submit" class="btn btn-primary">상품등록</button>
                             </form>
                         </div>
                     </div>
@@ -96,8 +96,6 @@
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white" href="itemView.html"><i
                                                     class="far fa-heart"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="itemView.html"><i
-                                                    class="far fa-eye"></i></a></li>
                                             <li><a class="btn btn-success text-white mt-2" href="itemView.html"><i
                                                     class="fas fa-cart-plus"></i></a></li>
                                         </ul>
