@@ -5,72 +5,591 @@
 <th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
     <title th:text="장바구니"/>
     <th:block th:fragment="content">
-        <!-- Modal -->
-        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="w-100 pt-1 mb-5 text-right">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                        <button type="submit" class="input-group-text bg-success text-light">
-                            <i class="fa fa-fw fa-search text-white"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <!-- Start Content -->
         <div class="container py-5">
-            <div class="row">
-                <div class="col-md-8">
-                    <h2 class="mb-3">Shopping Cart</h2>
-                    <div class="card">
-                        <div class="card-body">
-                            <!-- Sample cart items -->
+            <div style="display:flex;">
+                <div class="row" style="flex-grow: 2;">
+                    <div class="col-md-12">
+                        <h2 class="mb-3">Shopping Cart</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Sample cart items -->
+                                <form id="cart-form" action="http://">
+                                    <!--<th:block th:each="dto : ${todoList.dtoList}">-->
+                                    <th:block>
+                                        <ul class="list-group mb-3" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
 
-                            <form id="cart-form">
-                                <ul class="list-group" id="cart-items">
-                                    <!-- Existing cart item, modify accordingly -->
-                                    <th:block th:each="cart : ${carts}">
-                                    <li class="list-group-item">
-                                        <div class="product-info">
-                                            <input type="checkbox" class="item-checkbox" id="item1" name="item1">
-                                            <img src="product1.jpg" alt="Product 1" class="product-image">
-                                            <span class="product-name" th:text="${cart.name}"
-                                            ></span>
-                                            <span class="product-quantity" th:text="${cart.quantity}"
-                                            ></span>
-                                            <span class="product-price" th:text="${cart.price}">
-                                            </span>
-                                            <button class="btn btn-sm btn-success btn-add">+</button>
-                                            <button class="btn btn-sm btn-danger btn-sub">-</button>
-                                            <button class="btn btn-sm btn-remove-item">X</button>
-                                        </div>
-                                    </li>
+
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group" id="cart-items">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img src="product1.jpg" alt="Product 1" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">칠성 사이다</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            <input type="text" name="price" value="100">
+                                                            단가 : <span class="product-price">5000원</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span class="product-price">15000원</span>
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" name="quanity" value="1">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="btn btn-success"
+                                                                          id="btn-minus">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus">+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end">삭제</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </th:block>
-                                    <!-- Add checkboxes and modify other items similarly -->
-                                </ul>
-                                <div class="mt-4">
-                                    <strong>Total Price:</strong> $<span id="total-price">0</span>
-                                </div>
-                                <button class="btn btn-primary mt-3" id="checkout-btn"
-                                        th:onclick="'createOrder(\'' + ${cart.id} + '\')'">
-                                    Checkout</button>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
+                <div>
+                    <!--<div style="display: flex; align-items: center; top: 0; position: sticky;">-->
+                    <div style="display: flex; align-items: center; top: 70%; position: sticky; flex-direction: column">
+                        <div class="mt-4 mx-lg-5">
+                            <strong class=" fa-lg">
+                                총 주문가격 : <span id="total-price">15000</span>원
+                            </strong>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary mt-3" id="checkout-btn">주문하기</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- End Content -->
-
     </th:block>
 </th:block>
 
