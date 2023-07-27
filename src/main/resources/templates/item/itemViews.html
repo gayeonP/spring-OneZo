@@ -122,7 +122,7 @@
                                             <i class="text-muted fa fa-star"></i>
                                         </li>
                                     </ul>
-                                    <p class="text-center mb-0" th:text="${'₩ ' + item.getPrice()}"></p>
+                                    <p class="text-center mb-0" th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
                                 </div>
                             </div>
                         </div>

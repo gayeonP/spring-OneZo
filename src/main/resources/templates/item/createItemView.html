@@ -41,13 +41,13 @@
                                     <div class="form-group mb-3">
                                         <label for="product-price">가격</label>
                                         <input type="number" step="0.01" class="form-control" id="product-price"
-                                               name="price" required>
+                                               name="price" required min="0" max="1000000000">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="product-stock">상품 재고</label>
                                         <input type="number" step="1" class="form-control" id="product-stock"
-                                               name="stock" required>
+                                               name="stock" required min="1" max="1000000000">
                                     </div>
 
                                     <div class="form-group mb-3">
