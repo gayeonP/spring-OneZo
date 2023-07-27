@@ -5,6 +5,7 @@ import java.util.List;
 import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 import org.kakao.kakaoshopping.domain.service.cart.CartService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
+import org.kakao.kakaoshopping.web.dto.cart.request.CartToOrder;
 import org.kakao.kakaoshopping.web.dto.cart.request.CreateCart;
 import org.kakao.kakaoshopping.web.dto.cart.request.EditCart;
 import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
@@ -64,8 +65,10 @@ public class CartController {
 		return ResponseEntity.ok(savedQuantity);
 	}
 
-	@GetMapping("/test")
-	public String test() {
+	@GetMapping("/orderForm")
+	public String test(List<CartToOrder> carts) {
+		// DB 가서 아이템 조회 후, 주문에 필요한 정보를 dto에 담아서\
+		// 뷰로 전달해 주면 된다.
 		return "cart/cartViews";
 	}
 }
