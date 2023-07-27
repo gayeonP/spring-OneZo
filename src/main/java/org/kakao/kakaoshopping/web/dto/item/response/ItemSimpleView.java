@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.math.BigDecimal;
 
@@ -18,7 +19,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class ItemSimpleView {
+    private Long id;
     private String name;
+    @NumberFormat(pattern = "#,##0")
     private BigDecimal price;
     private String imagePath;
 
@@ -26,5 +29,6 @@ public class ItemSimpleView {
         this.name = item.getName();
         this.price = item.getPrice();
         this.imagePath = item.getImagePath();
+        this.id = item.getId();
     }
 }

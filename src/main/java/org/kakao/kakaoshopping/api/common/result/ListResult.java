@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class ListResult<T> {
 
-	private final List<T> list;
+	private final List<T>  list;
 	private final int size;
 	private final PageInfo pageInfo;
 

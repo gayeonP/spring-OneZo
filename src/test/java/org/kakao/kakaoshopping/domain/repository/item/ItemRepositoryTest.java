@@ -28,7 +28,7 @@ class ItemRepositoryTest {
     void initInsert() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream("src/main/resources/best_11st2.txt"), StandardCharsets.UTF_8));
-        User user = userService.findUser(1L);
+        User user = userService.findUser(2L);
         List<String> list = new ArrayList<>();
         String str = "";
         while ((str = br.readLine()) != null) {

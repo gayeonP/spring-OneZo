@@ -2,8 +2,10 @@ package org.kakao.kakaoshopping.domain.service.item;
 
 import lombok.RequiredArgsConstructor;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.repository.item.ItemRepository;
 import org.kakao.kakaoshopping.domain.repository.user.UserRepository;
+import org.kakao.kakaoshopping.domain.service.user.UserService;
 import org.kakao.kakaoshopping.web.exception.ItemNotFound;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class ItemService {
     private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final MessageSource messageSource;
 
 
@@ -32,9 +34,7 @@ public class ItemService {
      * @return
      */
     public Page<Item> getSimpleItemList(Pageable pageable) {
-        Pageable pageableDesc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
-                Sort.by("id").descending());
-        return itemRepository.findAll(pageableDesc);
+        return itemRepository.findAll(pageable);
     }
 
     /**
@@ -57,7 +57,9 @@ public class ItemService {
      * @param item
      * @return
      */
-    public Long createItem(Item item) {
+    public Long createItem(Item item, Long userId) {
+        User user = userService.findUser(userId);
+        item.setSeller(user);
         return itemRepository.save(item).getId();
     }
 
