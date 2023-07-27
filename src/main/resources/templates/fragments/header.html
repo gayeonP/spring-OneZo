@@ -38,9 +38,7 @@
                     <th:block th:unless="${session.loggedInUser==null}">
                         <!--                        <a class="nav-link-custom" th:href="@{/user/mypage}"-->
                         <!--                           th:text="${session.loggedInUser.getNickname()}">nickname</a>-->
-                        <form th:action="@{/logout}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link-custom">로그아웃</button>
-                        </form>
+                            <a class="nav-link-custom" style="font-weight: bold" th:href="@{/logout}">로그아웃</a>
                     </th:block>
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">

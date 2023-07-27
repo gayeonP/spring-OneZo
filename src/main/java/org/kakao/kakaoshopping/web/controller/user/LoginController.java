@@ -54,14 +54,14 @@ public class LoginController {
 	 * 기능 : 로그아웃
 	 * 작성자 - 임정규
 	 * 작성일 - 2023.07.25
-	 * @param request
+	 * 수정자 - 장규민
+	 * 수정일 - 2023.07.27
+	 * @param session
 	 * @return
 	 */
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String logout(HttpSession session) {
 		session.invalidate();
-
 		return "redirect:/";
 	}
 }
