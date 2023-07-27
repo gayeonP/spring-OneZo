@@ -37,12 +37,23 @@ public class Item extends BaseEntity {
     @Setter
     private User seller;
 
-    public void editItem(Item item) {
-        this.name = item.getName();
-        this.itemDetail = item.getItemDetail();
-        this.price = item.getPrice();
-        this.stock = item.getStock();
-    }
+	public void update(Item editItem){
+		this.name = editItem.getName();
+		this.price = editItem.getPrice();
+		this.stock = editItem.getStock();;
+		this.imagePath = editItem.getImagePath();;
+		this.itemDetail = editItem.getItemDetail();;
+	}
+
+	@Builder
+	public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail, User seller) {
+		this.name = name;
+		this.price = price;
+		this.stock = stock;
+		this.imagePath = imagePath;
+		this.itemDetail = itemDetail;
+		this.seller = seller;
+	}
 
     @Builder
     public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail, User seller) {
@@ -54,17 +65,8 @@ public class Item extends BaseEntity {
         this.seller = seller;
     }
 
-    @Builder(builderMethodName = "toEdit")
-    public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail) {
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.imagePath = imagePath;
-        this.itemDetail = itemDetail;
-    }
-
-    @Builder(builderMethodName = "byId", buildMethodName = "buildById")
-    public Item(Long id) {
-        this.id = id;
-    }
+	@Builder(builderMethodName = "byId")
+	public Item(Long id){
+		this.id = id;
+	}
 }

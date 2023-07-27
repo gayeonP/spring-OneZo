@@ -8,6 +8,7 @@ import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,9 +50,9 @@ public class Cart {
     @Setter
     private Integer quantity;
 
-	@Column(columnDefinition = "VARCHAR(1) DEFAULT ''", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private OrderStatus orderStatus;
+    @Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
+    @Setter
+    private OrderStatus orderStatus;
 
     @CustomCreateDate
     @Column(nullable = false, updatable = false)
