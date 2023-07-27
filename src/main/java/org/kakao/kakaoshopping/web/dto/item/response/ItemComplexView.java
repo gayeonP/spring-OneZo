@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kakao.kakaoshopping.domain.entity.item.Item;
 
 import java.math.BigDecimal;
 
-import org.kakao.kakaoshopping.domain.entity.item.Item;
-
+/**
+ * 기능 : 특정 상품을 자세히 보여주기 위한 DTO
+ * 작성자 - 박가연
+ * 작성일 - 2023.07.24
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +25,7 @@ public class ItemComplexView {
     private String itemDetail;
     private String sellerName;
 
-    public ItemComplexView(Item item){
+    public ItemComplexView(Item item) {
         this.name = item.getName();
         this.imagePath = item.getImagePath();
         this.itemDetail = item.getItemDetail();

@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.kakao.kakaoshopping.domain.entity.item.Item;
 
 import java.math.BigDecimal;
 
-import org.kakao.kakaoshopping.domain.entity.item.Item;
-
+/**
+ * 기능 : 모든 상품을 리스트를 보여주기 위해 상품을 담는 DTO
+ * 작성자 - 박가연
+ * 작성일 - 2023.07.24
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
