@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
  * 수정자 - 임창준
  * 수정일 - 2023.07.21
  */
-@NoArgsConstructor
 public class PhoneNumber {
 
 	@Column(columnDefinition = "VARCHAR(10) DEFAULT ''", nullable = false)

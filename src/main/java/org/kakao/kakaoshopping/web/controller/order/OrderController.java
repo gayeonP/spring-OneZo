@@ -38,7 +38,7 @@ public class OrderController {
 	@PostMapping("/order/create")
 	public String createOrder(CreateOrder createOrder, @LoginUser LoggedInUser loginUser,
 		Model model) {
-    
+
 		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), loginUser.getUserId());
 
 		model.addAttribute("orderId", saveOrderId); // 한 번더 조회해야 된다.
@@ -101,8 +101,6 @@ public class OrderController {
 		List<OrderSimpleView> orderViews = orders.getContent().stream()
 			.map(OrderSimpleView::new)
 			.toList();
-
-		model.addAttribute("orders", orderViews);
 
 		return "order/orderViews";
 	}

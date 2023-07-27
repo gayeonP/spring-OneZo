@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="장바구니"/>
+    <th:block th:fragment="content">
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div style="display:flex;">
+                <div class="row" style="flex-grow: 2;">
+                    <div class="col-md-12">
+                        <h2 class="mb-3">Shopping Cart</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Sample cart items -->
+                                <form id="cart-form" action="http://">
+                                    <th:block th:each="cart, userStat : ${carts}">
+                                        <ul class="list-group mb-3 cart" id="cart-items1">
+                                            <!-- Existing cart item, modify accordingly -->
+                                            <input type="hidden" name="cartId" th:value="${cart.id}">
+                                            <li class="list-group-item">
+                                                <div class="product-info"
+                                                     style="justify-content: flex-start; display: flex;">
+                                                    <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
+                                                    <div class="image-box" style="width: 30%">
+                                                        <img th:src="${cart.imagePath}" class="product-image">
+                                                    </div>
+                                                    <div style="width: 70%; display: flex; flex-direction: column">
+                                                        <div class="p-3">
+                                                            <span class="product-name fa-lg">[[${cart.itemName}]]</span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            단가 :
+                                                            <span class="product-price"
+                                                                  th:id="'cartItems.price[' + ${cart.price} + ']'"
+                                                                  th:name="price">
+                                                                [[${cart.price * cart.quantity}]]
+                                                            </span>
+                                                        </div>
+                                                        <div class="p-3">
+                                                            총 가격 : <span th:id="itemTotalPrice${cart.itemId}"
+                                                                         class="product-price">[[${cart.price * cart.quantity}]]</span>원
+                                                        </div>
+                                                        <div class="col-auto p-3"
+                                                             style="display: flex; justify-content: space-between">
+                                                            <div>
+                                                                <ul class="list-inline">
+                                                                    <li class="list-inline-item text-right">
+                                                                        수량
+                                                                        <input type="hidden" t
+                                                                               th:id="quantity${cart.itemId}"
+                                                                               th:name="quantity">
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-minus"
+                                                                              th:onclick="'minusQuantity(\'' + ${cart.id} + '\')'">-</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                    <span class="badge bg-secondary"
+                                                                          id="var-value">1</span>
+                                                                    </li>
+                                                                    <li class="list-inline-item">
+                                                                        <span class="btn btn-success"
+                                                                              id="btn-plus"
+                                                                              th:onclick="'addQuantity(\'' + ${cart.id} + '\')'">>+</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div>
+                                                                <button class="btn btn-danger text-xl-end"
+                                                                        th:onclick="'deleteCart(\'' + ${cart.id} + '\')'">
+                                                                    >삭제
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </th:block>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!--<div style="display: flex; align-items: center; top: 0; position: sticky;">-->
+                    <div style="display: flex; align-items: center; top: 70%; position: sticky; flex-direction: column">
+                        <div class="mt-4 mx-lg-5">
+                            <strong class=" fa-lg">
+                                총 주문가격 : <span id="totalPrice">15000</span>원
+                            </strong>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary mt-3" id="checkout-btn">주문하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+
+    // th:onclick="'findOrder(\'' + ${orderId} + '\')'">
+    console.log(axios)
+
+
+    function addQuantity(cartId) {
+        let quantity = document.getElementById('quantity' + cartId).value;
+        sendUpdateQuantity(cartId, quantity + 1);
+
+    }
+
+    function minusQuantity(cartId) {
+        let quantity = document.getElementById('quantity' + cartId).value;
+        sendUpdateQuantity(cartId, quantity - 1);
+    }
+
+    function sendUpdateQuantity(cartId, quantity) {
+        axios
+            .post("/user/updateQuantityCart", {
+                quantity: quantity,
+                cartId: cartId
+            })
+            .then(response => {
+                let savedQuantity = response.data();
+                let price = document.getElementById('price' + cartId).value;
+
+                document.getElementById('quantity' + cartId).value = savedQuantity;
+                document.getElementById('itemTotalPrice' + cartId).value = parseInt(savedQuantity) * parseInt(price);
+            });
+    }
+
+    function deleteCart(cartId) {
+        axios
+            .post("/user/deleteItemInCart", {
+                cartId: cartId
+            })
+            .then(response => {
+                alert("삭제 완료 되었습니다.")
+            });
+    }
+
+    function calculateTotalPrice() {
+        let totalPrice = 0;
+
+        document.getElementsByClassName("cart")
+            .forEach((item, index) => {
+                let quantity = document.getElementById("quantity" + index).value;
+                let price = document.getElementById("price" + index).value;
+
+                totalPrice += parseInt(quantity) * parseInt(price);
+            })
+
+        document.getElementById("totalPrice").value = totalPrice;
+    }
+</script>
