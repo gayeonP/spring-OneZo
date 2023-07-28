@@ -24,6 +24,6 @@ public class ReadItem {
 	public Item toEntity() {
 		return Item.byId()
 			.id(itemId)
-			.build();
+			.buildById();
 	}
 }

@@ -1,62 +1,159 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
 <th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문등록"/>
+    <title th:text="장바구니"/>
     <th:block th:fragment="content">
-        <form th:action="@{/submitOrder}" method="post">
-            <label for="zipCode">우편번호:</label>
-            <input type="text" id="zipCode" name="zipCode" th:field="*{zipCode}" required>
-            <br>
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div style="display:flex;">
+                <div class="row" style="flex-grow: 2;">
+                    <div class="col-md-12">
+                        <h2 class="mb-3">Shopping Cart</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Sample cart items -->
+                                <form id="cart-form" action="http://">
+                                    <!-- HTML table with inline styles for borders and separators -->
+                                    <table style="border-collapse: collapse; width: 100%;">
+                                        <tr style="text-align: center">
+                                            <th> <h5 class="mb-0">상품이미지</h5></th>
+                                            <th> <h5 class="mb-0">상품이름</h5> </th>
+                                            <th> <h5 class="mb-0">상품수량</h5></th>
+                                            <th> <h5 class="mb-0">상품가격</h5></th>
+                                            <th> <h5 class="mb-0">상품 합계금액</h5></th>
+                                        </tr>
+                                        <tr th:each="cart: ${carts}" style="border-bottom: 1px solid #ddd;">
+                                            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                                                <img style="width: 80px;" th:src="${cart.getImagePath()}" />
+                                            </td>
+                                            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                                                <span th:text="${cart.getName()}" />
+                                            </td>
+                                            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                                                <span th:text="${cart.getQuantity()}" />
+                                            </td>
+                                            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                                                <span th:text="${'₩ ' + #numbers.formatInteger(cart.getPrice(), 3, 'COMMA')}" />
+                                            </td>
+                                            <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
+                                                <span th:text="${'₩ ' + #numbers.formatInteger(cart.getPrice() * cart.getQuantity(), 3, 'COMMA')}" />
+                                            </td>
+                                        </tr>
+                                    </table>
 
-            <label for="city">도시:</label>
-            <input type="text" id="city" name="city" th:field="*{city}" required>
-            <br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!--<div style="display: flex; align-items: center; top: 0; position: sticky;">-->
+                    <div style="display: flex; align-items: center; top: 50%; position: sticky; flex-direction: column">
+                        <div>
+                            <section class="bg-light">
+                                <div class="container pb-5">
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-5">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h1 class="h2">주문 정보 입력</h1>
+                                                    <form action="/order/create" method="post">
+                                                        <label for="zipCode">우편번호</label><br>
+                                                        <input type="text" id="zipCode" name="zipCode" required>
+                                                        <br>
 
-            <label for="street">도로명:</label>
-            <input type="text" id="street" name="street" th:field="*{street}" required>
-            <br>
+                                                        <label for="city">주소</label><br>
+                                                        <input type="text" id="city" name="city" required>
+                                                        <br>
 
-            <label for="headNumber">전화번호 앞자리:</label>
-            <input type="text" id="headNumber" name="headNumber" th:field="*{headNumber}" required>
-            <br>
+                                                        <label for="street">상세주소</label><br>
+                                                        <input type="text" id="street" name="street" required>
+                                                        <br>
 
-            <label for="middleNumber">전화번호 중간자리:</label>
-            <input type="text" id="middleNumber" name="middleNumber" th:field="*{middleNumber}" required>
-            <br>
+                                                        <label for="headNumber" class="form-label">전화번호</label>
 
-            <label for="tailNumber">전화번호 뒷자리:</label>
-            <input type="text" id="tailNumber" name="tailNumber" th:field="*{tailNumber}" required>
-            <br>
+                                                        <div class="mb-3" th:width="100px">
+                                                            <input type="text"
+                                                                   style="border-color: lightgray; width: 80px;"
+                                                                   id="headNumber" name="headNumber" required maxlength="3">-
+                                                            <input type="text"
+                                                                   style="border-color: lightgray; width: 80px;"
+                                                                   id="middleNumber" name="middleNumber" required maxlength="4">-
+                                                            <input type="text"
+                                                                   style="border-color: lightgray; width: 80px;"
+                                                                   id="tailNumber" name="tailNumber" required maxlength="4">
+                                                        </div>
+                                                        <label for="deliveryRequest">배송 요청사항:</label>
+                                                        <br>
+                                                        <textarea id="deliveryRequest"
+                                                                  name="deliveryRequest"></textarea>
+                                                        <br>
 
-            <label for="deliveryRequest">배송 요청사항:</label>
-            <textarea id="deliveryRequest" name="deliveryRequest" th:field="*{deliveryRequest}"></textarea>
-            <br>
+<!--                                                        <label for="payment">결제 수단:</label>-->
+<!--                                                        <select id="payment" name="payment" required>-->
+<!--                                                            <option value="">&#45;&#45; 선택하세요 &#45;&#45;</option>-->
+<!--                                                            <option value="0">신용카드</option>-->
+<!--                                                            <option value="1">현금</option>-->
+<!--                                                            <option value="2">카카오페이</option>-->
+<!--                                                        </select>-->
+                                                        <br>
+                                                        <div class="mt-4 mx-lg-5">
+                                                            <strong class=" fa-lg">
+                                                                총 주문가격 : <span id="total-price"></span>원
+                                                            </strong>
+                                                        </div>
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary mt-3" id="checkout-btn">주문하기</button>
+                                                        </div>
 
-            <label for="payment">결제 수단:</label>
-            <select id="payment" name="payment" th:field="*{payment}" required>
-                <option value="">-- 선택하세요 --</option>
-                <option value="CREDIT_CARD">신용카드</option>
-                <option value="BANK_TRANSFER">계좌이체</option>
-                <option value="CASH">현금</option>
-            </select>
-            <br>
+                                                        <div style="display: none">
+                                                        <th:block th:each="cart, userStat: ${carts}">
+                                                            <input type="text" th:name="'orderItems[' + ${userStat.index} + '].itemId'"
+                                                                   th:value="${cart.getItemId()}">
+                                                            <input type="text" th:name="'orderItems[' + ${userStat.index} + '].quantity'"
+                                                                   th:value="${cart.getQuantity()}">
+                                                            <input type="text" th:name="'orderItems[' + ${userStat.index} + '].price'"
+                                                                   th:value="${cart.getPrice()}">
+                                                        </th:block>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
 
-            <label>주문 품목:</label>
-            <table>
-                <tr th:each="orderItem, itemStat : *{orderItems}">
-                    <td>
-                        <input type="text" th:field="*{orderItems[__${itemStat.index}__].itemName}" required>
-                    </td>
-                    <td>
-                        <input type="number" th:field="*{orderItems[__${itemStat.index}__].quantity}" required>
-                    </td>
-                    <td>
-                        <input type="number" th:field="*{orderItems[__${itemStat.index}__].price}" required>
-                    </td>
-                </tr>
-            </table>
-
-            <button type="submit">주문하기</button>
-        </form>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </th:block>
 </th:block>
+
+<script th:inline="javascript">
+    function setTotalPrice() {
+        var total = 0;
+        var cartItems = [[${carts}]]; // Thymeleaf 컨텍스트로부터 카트 아이템 배열을 가져옵니다.
+
+        for (var i = 0; i < cartItems.length; i++) {
+            var cart = cartItems[i];
+            total += cart.price * cart.quantity;
+        }
+
+        // 총 주문가격을 "total-price"라는 ID를 가진 HTML 요소에 표시합니다.
+        document.getElementById("total-price").innerText = formatCurrency(total);
+    }
+
+    function formatCurrency(amount) {
+        // 숫자를 화폐 형식으로 포맷하는 함수입니다. (예: ₩ 10,000)
+        return '₩ ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+    function createOrder() {
+        window.location.href = '/order/create';
+    }
+    setTotalPrice()
+</script>

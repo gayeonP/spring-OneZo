@@ -2,11 +2,15 @@ package org.kakao.kakaoshopping.web.controller.order;
 
 import java.util.List;
 
+import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 import org.kakao.kakaoshopping.domain.entity.order.Order;
+import org.kakao.kakaoshopping.domain.service.cart.CartService;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
+import org.kakao.kakaoshopping.web.dto.cart.response.CartSimpleView;
 import org.kakao.kakaoshopping.web.dto.order.request.CreateOrder;
+import org.kakao.kakaoshopping.web.dto.order.request.CreateOrderItem;
 import org.kakao.kakaoshopping.web.dto.order.response.OrderComplexView;
 import org.kakao.kakaoshopping.web.dto.order.response.OrderSimpleView;
 import org.kakao.kakaoshopping.web.dto.user.login.LoggedInUser;
@@ -23,11 +27,11 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 
 	private final OrderService orderService;
-
+	private final CartService cartService;
 	/**
 	 * 기능 : 주문을 등록한다.
 	 * 작성자 - 장원준
-	 * 작성일 - 2023.07.14
+	 * 작성일 - 2023.07.14ㅐ
 	 * 수정자 - 장원준
 	 * 수정일 - 2023.07.25
 	 * @param createOrder
@@ -38,7 +42,8 @@ public class OrderController {
 	@PostMapping("/order/create")
 	public String createOrder(CreateOrder createOrder, @LoginUser LoggedInUser loginUser,
 		Model model) {
-
+		List<Long> ids = createOrder.getOrderItems().stream()
+			.map(CreateOrderItem::getItemId).toList();
 		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), loginUser.getUserId());
 
 		model.addAttribute("orderId", saveOrderId); // 한 번더 조회해야 된다.
@@ -118,5 +123,14 @@ public class OrderController {
 		orderService.deleteOrder(orderId);
 
 		return "redirect:/orders";
+	}
+
+	@GetMapping("/order/form")
+	public String orderForm(Model model, @LoginUser LoggedInUser loggedInUser) {
+		List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
+		List<CartSimpleView> cartSimpleView = carts.stream().map(CartSimpleView::new)
+			.toList();
+		model.addAttribute("carts", cartSimpleView);
+		return "order/orderForm";
 	}
 }

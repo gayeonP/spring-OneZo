@@ -43,3 +43,5 @@ out/
 
 src/main/generated/org/kakao/kakaoshopping/domain/entity/*
 
+
+build.gradle

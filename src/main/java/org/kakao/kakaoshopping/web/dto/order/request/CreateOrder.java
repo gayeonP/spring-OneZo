@@ -34,10 +34,9 @@ public class CreateOrder {
 
 	public Order toEntity() {
 		List<OrderItem> orderItems1 = parseOrderItems();
-
 		return Order.builder()
 			.delivery(parseDelivery())
-			.payment(payment)
+			.payment(Payment.CARD)
 			.orderItems(parseOrderItems())
 			.build();
 	}
@@ -46,6 +45,7 @@ public class CreateOrder {
 		return Delivery.builder()
 			.address(parseAddress())
 			.phoneNumber(parsePhoneNumber())
+			.deliveryRequest(deliveryRequest)
 			.build();
 	}
 

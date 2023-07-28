@@ -55,16 +55,7 @@ public class Item extends BaseEntity {
 		this.seller = seller;
 	}
 
-    @Builder(builderMethodName = "toEdit")
-    public Item(String name, BigDecimal price, Integer stock, String imagePath, String itemDetail) {
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.imagePath = imagePath;
-        this.itemDetail = itemDetail;
-    }
-
-	@Builder(builderMethodName = "byId")
+	@Builder(builderMethodName = "byId", buildMethodName = "buildById")
 	public Item(Long id){
 		this.id = id;
 	}
