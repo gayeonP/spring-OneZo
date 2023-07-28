@@ -1,9 +1,11 @@
 package org.kakao.kakaoshopping.web.controller.order;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.kakao.kakaoshopping.domain.entity.cart.Cart;
 import org.kakao.kakaoshopping.domain.entity.order.Order;
+import org.kakao.kakaoshopping.domain.entity.order.OrderItem;
 import org.kakao.kakaoshopping.domain.service.cart.CartService;
 import org.kakao.kakaoshopping.domain.service.order.OrderService;
 import org.kakao.kakaoshopping.web.annotaion.LoginUser;
@@ -28,12 +30,13 @@ public class OrderController {
 
 	private final OrderService orderService;
 	private final CartService cartService;
+
 	/**
 	 * 기능 : 주문을 등록한다.
 	 * 작성자 - 장원준
-	 * 작성일 - 2023.07.14ㅐ
+	 * 작성일 - 2023.07.14
 	 * 수정자 - 장원준
-	 * 수정일 - 2023.07.25
+	 * 수정일 - 2023.07.29
 	 * @param createOrder
 	 * @param loginUser
 	 * @param model
@@ -42,9 +45,12 @@ public class OrderController {
 	@PostMapping("/order/create")
 	public String createOrder(CreateOrder createOrder, @LoginUser LoggedInUser loginUser,
 		Model model) {
-		List<Long> ids = createOrder.getOrderItems().stream()
-			.map(CreateOrderItem::getItemId).toList();
-		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), loginUser.getUserId());
+
+		List<OrderItem> orderItems = createOrder.getOrderItems().stream()
+			.map(CreateOrderItem::toEntity)
+			.collect(Collectors.toList());
+
+		Long saveOrderId = orderService.creatOrder(createOrder.toEntity(), orderItems, loginUser.getUserId());
 
 		model.addAttribute("orderId", saveOrderId); // 한 번더 조회해야 된다.
 
@@ -65,7 +71,12 @@ public class OrderController {
 	public String createOrderFromCart(CreateOrder createOrder, @LoginUser LoggedInUser loggedInUser, Long cardId) {
 		// todo 장바구니에서 가져온 주문 데이터를 등록하는 로직이 필요함.
 		// todo 장바구니 번호를 가지고 DB를 조회해서 장바구니에 등록된 상품들을 등록해줘야 됨.
-		orderService.creatOrderFromCart(createOrder.toEntity(), loggedInUser.getUserId(), cardId);
+
+		List<OrderItem> orderItems = createOrder.getOrderItems().stream()
+			.map(CreateOrderItem::toEntity)
+			.collect(Collectors.toList());
+
+		orderService.creatOrderFromCart(createOrder.toEntity(), orderItems, loggedInUser.getUserId(), cardId);
 
 		return "redirect:/orders";
 	}

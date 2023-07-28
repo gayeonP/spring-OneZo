@@ -99,7 +99,6 @@ public class Order {
 		}
 		orderItem.setOrder(this);
 		orderItems.add(orderItem);
-		System.out.println("orderItem = " + orderItem);
 	}
 
 	public void edit(Order order) {
