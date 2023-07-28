@@ -41,6 +41,7 @@ public class OrderComplexView {
 		this.street = order.getDelivery().getAddress().getStreet();
 		this.phoneNumber = order.getDelivery().getPhoneNumber().toStringPhone();
 		this.orderDate = order.getOrderDate();
+		this.totalPrice =order.getTotalPrice();
 		this.orderItems = order.getOrderItems().stream()
 			.map(OrderItemSimpleView::new)
 			.toList();

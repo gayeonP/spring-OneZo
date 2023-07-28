@@ -9,6 +9,7 @@ import org.kakao.kakaoshopping.domain.entity.order.Order;
 import org.kakao.kakaoshopping.domain.entity.order.OrderItem;
 import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.repository.order.OrderRepository;
+import org.kakao.kakaoshopping.domain.service.cart.CartService;
 import org.kakao.kakaoshopping.domain.service.item.ItemService;
 import org.kakao.kakaoshopping.domain.service.user.UserService;
 import org.kakao.kakaoshopping.web.common.paging.request.OrderSearchCondition;
@@ -30,6 +31,7 @@ public class OrderService {
 	private final OrderItemService orderItemService;
 	private final UserService userService;
 	private final ItemService itemService;
+	private final CartService cartService;
 
 	public Long creatOrder(Order order, Long userId) {
 		// todo 재고가 0이면 반려해야 됨
@@ -48,15 +50,7 @@ public class OrderService {
 			orderItem.setOrder(savedOrder);
 			orderItemService.createOrderItem(orderItem);
 		});
-		// for(int i=0 ; i<order.getOrderItems().size() ; i++){
-		// 	OrderItem orderItem = order.getOrderItems().get(i);
-		// 	Long itemId = ids.get(i);
-		// 	// todo
-		// 	Item item = itemService.getItemComplex(itemId);
-		// 	orderItem.setItem(item);
-		// 	orderItem.setOrder(order);
-		// 	orderItemService.createOrderItem(orderItem);
-		// }
+		cartService.updateOrderStateCart(userId);
 
 		return savedOrder.getId();
 	}
@@ -64,7 +58,7 @@ public class OrderService {
 	public Long creatOrderFromCart(Order order, Long userId, Long cardId) {
 		// 장바구니 삭제해줌
 		// cartService.deleteCart(cartId)
-		//
+
 
 		return creatOrder(order, userId);
 	}

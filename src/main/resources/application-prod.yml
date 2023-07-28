@@ -1,1 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://172.31.41.40:3306/springOnezo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: jgm
+    password: jgm1234
 

@@ -100,8 +100,8 @@ public class ItemController {
     }
 
     @GetMapping("/seller/editItem")
-    public String editItemView(EditItem editItem, Model model) {
-        Item item = itemService.getItemComplex(editItem.getItemId());
+    public String editItemView(Long itemId, Model model) {
+        Item item = itemService.getItemComplex(itemId);
         ItemComplexView complexView = ItemComplexView.builder()
                 .id(item.getId())
                 .imagePath(item.getImagePath())

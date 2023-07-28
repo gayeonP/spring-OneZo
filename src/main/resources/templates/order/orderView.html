@@ -29,8 +29,10 @@
                                     <p>전화번호: <span th:text="${order.phoneNumber}"/></p>
                                     <p>주소: <span th:text="${'(' + order.zipCode + ') ' + order.city + order.street}"/>
                                     </p>
-                                    <p>결제수단: <span th:text="${order.payment}"/></p>
-                                    <p>총 주문 가격: <span th:text="${order.totalPrice + '원'}"/></p>
+                                    <p>결제수단: 신용카드 </p>
+
+                                   <span th:text="${'주문가격 : ₩ ' + #numbers.formatInteger(order.getTotalPrice(), 3, 'COMMA') + ' 원'}" />
+
                                 </div>
                             </div>
                         </div>
@@ -47,7 +49,7 @@
                                     </div>
                                     <div class="card-body">
                                         <p>수량 : [[${orderItem.quantity}]]</p>
-                                        <p>단가 : [[${orderItem.price}]]</p>
+                                        <span th:text="${'단가 : ₩ ' + #numbers.formatInteger(orderItem.getPrice(), 3, 'COMMA') + '원'}" />
                                     </div>
                                 </div>
                             </th:block>
