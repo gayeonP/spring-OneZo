@@ -1,13 +1,11 @@
 package org.kakao.kakaoshopping.web.dto.order.request;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.kakao.kakaoshopping.domain.entity.embedded.Address;
 import org.kakao.kakaoshopping.domain.entity.embedded.Delivery;
 import org.kakao.kakaoshopping.domain.entity.embedded.PhoneNumber;
 import org.kakao.kakaoshopping.domain.entity.order.Order;
-import org.kakao.kakaoshopping.domain.entity.order.OrderItem;
 import org.kakao.kakaoshopping.domain.enums.Payment;
 
 import lombok.AllArgsConstructor;
@@ -33,11 +31,9 @@ public class CreateOrder {
 	private List<CreateOrderItem> orderItems;
 
 	public Order toEntity() {
-		List<OrderItem> orderItems1 = parseOrderItems();
 		return Order.builder()
 			.delivery(parseDelivery())
 			.payment(Payment.CARD)
-			.orderItems(parseOrderItems())
 			.build();
 	}
 
@@ -63,11 +59,5 @@ public class CreateOrder {
 			.middleNumber(middleNumber)
 			.tailNumber(tailNumber)
 			.build();
-	}
-
-	private List<OrderItem> parseOrderItems() {
-		return orderItems.stream()
-			.map(CreateOrderItem::toEntity)
-			.collect(Collectors.toList());
 	}
 }

@@ -33,21 +33,22 @@ public class OrderService {
 	private final ItemService itemService;
 	private final CartService cartService;
 
-	public Long creatOrder(Order order, Long userId) {
+	public Long creatOrder(Order order, List<OrderItem> orderItems, Long userId) {
 		// todo 재고가 0이면 반려해야 됨
 		User user = userService.findUser(userId);
 		order.setUser(user);
 		order.calculateTotalPrice();
 
-		List<OrderItem> orderItems = order.getOrderItems();
-		order.setOrderItems(null);
+		//List<OrderItem> orderItems = order.getOrderItems();
+		//order.setOrderItems(null);
 		Order savedOrder = orderRepository.save(order);
 		orderItems.forEach(orderItem -> {
 			Long itemId = orderItem.getItem().getId();
 			// todo
 			Item item = itemService.getItemComplex(itemId);
 			orderItem.setItem(item);
-			orderItem.setOrder(savedOrder);
+			savedOrder.addOrderItem(orderItem);
+			//orderItem.setOrder(savedOrder);
 			orderItemService.createOrderItem(orderItem);
 		});
 		cartService.updateOrderStateCart(userId);
@@ -55,12 +56,11 @@ public class OrderService {
 		return savedOrder.getId();
 	}
 
-	public Long creatOrderFromCart(Order order, Long userId, Long cardId) {
+	public Long creatOrderFromCart(Order order, List<OrderItem> orderItems, Long userId, Long cardId) {
 		// 장바구니 삭제해줌
 		// cartService.deleteCart(cartId)
 
-
-		return creatOrder(order, userId);
+		return creatOrder(order, orderItems, userId);
 	}
 
 	public Order findOrder(Long id) {
