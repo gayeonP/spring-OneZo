@@ -1,5 +1,5 @@
 <!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <header>
     <nav class="navbar navbar-expand-lg navbar-light shadow">
@@ -20,13 +20,13 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" onclick="alert('준비중')">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/items">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" onclick="alert('준비중')">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -38,9 +38,7 @@
                     <th:block th:unless="${session.loggedInUser==null}">
                         <!--                        <a class="nav-link-custom" th:href="@{/user/mypage}"-->
                         <!--                           th:text="${session.loggedInUser.getNickname()}">nickname</a>-->
-                        <form th:action="@{/logout}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link-custom">로그아웃</button>
-                        </form>
+                            <a class="nav-link-custom" style="font-weight: bold" th:href="@{/logout}">로그아웃</a>
                     </th:block>
                     <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                         <div class="input-group">
@@ -50,15 +48,15 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                    <a class="nav-icon d-none d-lg-inline" onclick="alert('준비중')" data-bs-toggle="modal"
                        data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a th:if="${session.loggedInUser != null}" class="nav-icon position-relative text-decoration-none" href="/user/carts">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a th:if="${session.loggedInUser != null}" class="nav-icon position-relative text-decoration-none" onclick="alert('준비중')">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>

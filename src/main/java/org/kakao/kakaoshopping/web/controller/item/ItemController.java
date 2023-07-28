@@ -99,9 +99,9 @@ public class ItemController {
         return "redirect:/item?itemId=" + id;
     }
 
-    @GetMapping("/seller/editItem/{itemId}")
-    public String editItemView(@PathVariable Long itemId, Model model) {
-        Item item = itemService.getItemComplex(itemId);
+    @GetMapping("/seller/editItem")
+    public String editItemView(EditItem editItem, Model model) {
+        Item item = itemService.getItemComplex(editItem.getItemId());
         ItemComplexView complexView = ItemComplexView.builder()
                 .id(item.getId())
                 .imagePath(item.getImagePath())
@@ -112,9 +112,9 @@ public class ItemController {
         return "item/editItemView";
     }
 
-    @PostMapping("/seller/editItem/{itemId}")
-    public String editItem(EditItem editItem, @PathVariable Long itemId, Model model) {
-        Item item = itemService.editItem(editItem.toEntity(), itemId);
+    @PostMapping("/seller/editItem")
+    public String editItem(EditItem editItem, Model model) {
+        Item item = itemService.editItem(editItem.toEntity(), editItem.getItemId());
         ItemComplexView complexView = ItemComplexView.builder()
                 .id(item.getId())
                 .imagePath(item.getImagePath())
@@ -122,7 +122,7 @@ public class ItemController {
                 .price(item.getPrice())
                 .build();
         model.addAttribute("item", complexView);
-        return "item/editItemView";
+        return "redirect:/item?itemId="+editItem.getItemId();
     }
 
     @PostMapping("/seller/deleteItem/{itemId}")

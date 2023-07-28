@@ -84,11 +84,13 @@ body, ul, li, p, a, label, input, div {
 }
 
 .bg-success {
-    background-color: #59ab6e !important;
+    /*background-color: #59ab6e !important;*/
+    background-color: #000 !important;
 }
 
 .btn-success {
-    background-color: #59ab6e !important;
+    /*background-color: #59ab6e !important;*/
+    background-color: #000 !important;
     border-color: #56ae6c !important;
 }
 
@@ -206,12 +208,14 @@ body, ul, li, p, a, label, input, div {
 /* Carousel Hero */
 #template-mo-zay-hero-carousel .carousel-indicators li {
     margin-top: -50px;
-    background-color: #59ab6e;
+    background-color: #000;
+    /*background-color: #59ab6e;*/
 }
 
 #template-mo-zay-hero-carousel .carousel-control-next i,
 #template-mo-zay-hero-carousel .carousel-control-prev i {
-    color: #59ab6e !important;
+    /*color: #59ab6e !important;*/
+    color: #000 !important;
     font-size: 2.8em !important;
 }
 

@@ -20,6 +20,8 @@ public class EditCart {
     public Cart toEntity() {
         return Cart.toEdit()
                 .quantity(quantity)
-                .build();
+                .id(cartId)
+                .editBuild()
+                ;
     }
 }

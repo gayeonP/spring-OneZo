@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class EditItem {
 
+    private Long itemId;
     @NotEmpty
     private String name;
 
@@ -30,11 +31,12 @@ public class EditItem {
     private String itemDetail;
 
     public Item toEntity() {
-        return Item.builder()
+        return Item.toEdit()
+                .id(itemId)
                 .name(name)
                 .price(price)
                 .stock(stock)
-                .imagePath("https://cdn.011st.com/11dims/resize/300/11src/product/5931662112/L300.jpg?708000000")
+                .imagePath("https://newsimg.sedaily.com/2021/04/08/22L06CUBC8_2.png")
                 .itemDetail(itemDetail)
                 .build();
     }

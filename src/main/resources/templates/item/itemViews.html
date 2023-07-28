@@ -80,10 +80,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-6 pb-4">
+                        <div class="col-md-6 pb-4" style="text-align: right">
                             <form action="/seller/createItem">
                                 <button th:if="${session.loggedInUser != null && session.loggedInUser.getUserType().name().equals('SELLER')}"
-                                        type="submit" class="btn btn-primary" >상품등록</button>
+                                        type="submit" class="btn btn-primary">상품등록
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -91,19 +92,19 @@
                         <div class="col-md-4" th:each="item: ${items.getList()}">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid" th:src="${item.getImagePath()}">
+                                    <img class="card-img rounded-0 img-fluid" style="min-height: 212px" th:if="${item.getImagePath()==null}" src="https://newsimg.sedaily.com/2021/04/08/22L06CUBC8_2.png">
+                                    <img class="card-img rounded-0 img-fluid" style="min-height: 212px" th:unless="${item.getImagePath()==null}" th:src="${item.getImagePath()}">
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white" href="itemView.html"><i
+                                            <li><a class="btn btn-success text-white" onclick="alert('준비중')"><i
                                                     class="far fa-heart"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="itemView.html"><i
-                                                    class="far fa-eye"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" href="itemView.html"><i
+                                            <li><a class="btn btn-success text-white mt-2"
+                                                   th:onclick="'javascript:addCart(\'' + ${item.getId()} + '\')'"><i
                                                     class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="min-height:15rem">
                                     <a th:href="${'/item?itemId=' + item.getId()}" class="h3 text-decoration-none"
                                        th:text="${item.getName()}"></a>
                                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
@@ -124,7 +125,8 @@
                                             <i class="text-muted fa fa-star"></i>
                                         </li>
                                     </ul>
-                                    <p class="text-center mb-0" th:text="${'₩ ' + item.getPrice()}"></p>
+                                    <p class="text-center mb-0"
+                                       th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
                                 </div>
                             </div>
                         </div>
@@ -163,6 +165,21 @@
             </div>
     </th:block>
 </th:block>
+<script>
+    function addCart(itemId) {
+        axios.post("/user/createCart",
+            {
+                itemId: itemId,
+                quantity: "1"
+            })
+            .then(response => {
+                let answer = confirm('장바구니에 담았습니다. 장바구니로 이동하겠습니까?');
+                if (answer === true) {
+                    window.location = "/user/carts";
+                }
+            });
+    }
+</script>
 </html>
 
 

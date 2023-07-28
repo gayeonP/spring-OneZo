@@ -39,10 +39,11 @@ public class CartController {
    * @param loggedInUser
    * @return String
    */
-  @PostMapping("/createCart/{id}")
-  public String createCart(CreateCart createCart, @PathVariable Long id, @LoginUser LoggedInUser loggedInUser) {
-      cartService.addCart(createCart.toEntity(), id, loggedInUser.getUserId());
-      return "redirect:/user/carts";
+  @PostMapping("/createCart")
+  @ResponseBody
+  public ResponseEntity<Void> createCart(@RequestBody CreateCart createCart, @LoginUser LoggedInUser loggedInUser) {
+      cartService.addCart(createCart.toEntity(), createCart.getItemId(), loggedInUser.getUserId());
+      return ResponseEntity.ok().build();
   }
 
   /**

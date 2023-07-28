@@ -14,33 +14,36 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- Sample cart items -->
-                                <form id="cart-form" action="http://">
+                                <form id="cart-form">
                                     <th:block th:each="cart, userStat : ${carts}">
                                         <ul class="list-group mb-3 cart" id="cart-items1">
                                             <!-- Existing cart item, modify accordingly -->
-                                            <input type="hidden" name="cartId" th:value="${cart.id}">
-                                            <li class="list-group-item">
+                                            <input type="hidden" name="cartId" th:value="${cart.cartId}">
+                                            <li class="list-group-item">F
                                                 <div class="product-info"
                                                      style="justify-content: flex-start; display: flex;">
                                                     <!--<input type="checkbox" class="item-checkbox" id="item1" name="item1">-->
-                                                    <div class="image-box" style="width: 30%">
-                                                        <img th:src="${cart.imagePath}" class="product-image">
+                                                    <div class="image-box p-1" style="width: 30%">
+                                                        <img th:src="${cart.getImagePath()}" class="product-image"
+                                                             style="display:block;
+                                                            width:100%;
+                                                            height:auto;">
                                                     </div>
                                                     <div style="width: 70%; display: flex; flex-direction: column">
                                                         <div class="p-3">
-                                                            <span class="product-name fa-lg">[[${cart.itemName}]]</span>
+                                                            <span class="product-name fa-lg">[[${cart.name}]]</span>
                                                         </div>
                                                         <div class="p-3">
                                                             단가 :
                                                             <span class="product-price"
-                                                                  th:id="'cartItems.price[' + ${cart.price} + ']'"
-                                                                  th:name="price">
-                                                                [[${cart.price * cart.quantity}]]
-                                                            </span>
+                                                                  th:id="'price' + ${userStat.index}"
+                                                                  th:name="price"
+                                                                  th:text="|${#numbers.formatInteger(cart.price,3,'COMMA')}|"></span>원
                                                         </div>
                                                         <div class="p-3">
-                                                            총 가격 : <span th:id="itemTotalPrice${cart.itemId}"
-                                                                         class="product-price">[[${cart.price * cart.quantity}]]</span>원
+                                                            총 가격 : <span th:id="'itemTotalPrice' + ${userStat.index}"
+                                                                  class="product-price"
+                                                                  th:text="|${#numbers.formatInteger(cart.price * cart.quantity,3,'COMMA')}|"></span>원
                                                         </div>
                                                         <div class="col-auto p-3"
                                                              style="display: flex; justify-content: space-between">
@@ -48,30 +51,32 @@
                                                                 <ul class="list-inline">
                                                                     <li class="list-inline-item text-right">
                                                                         수량
-                                                                        <input type="hidden" t
-                                                                               th:id="quantity${cart.itemId}"
+                                                                        <input type="hidden"
+                                                                               th:id="'quantity' + ${userStat.index}"
                                                                                th:name="quantity">
                                                                     </li>
                                                                     <li class="list-inline-item">
                                                                         <span class="btn btn-success"
                                                                               id="btn-minus"
-                                                                              th:onclick="'minusQuantity(\'' + ${cart.id} + '\')'">-</span>
+                                                                              th:onclick="'javascript:minusQuantity(\'' + ${userStat.index} +'\',\''+ ${cart.getCartId()} + '\');'">-</span>
                                                                     </li>
                                                                     <li class="list-inline-item">
                                                                     <span class="badge bg-secondary"
-                                                                          id="var-value">1</span>
+                                                                          th:id="visibleQuantity + ${userStat.index}"
+                                                                    th:text="${cart.quantity}">1</span>
                                                                     </li>
                                                                     <li class="list-inline-item">
                                                                         <span class="btn btn-success"
                                                                               id="btn-plus"
-                                                                              th:onclick="'addQuantity(\'' + ${cart.id} + '\')'">>+</span>
+                                                                              th:onclick="'javascript:addQuantity(\'' + ${userStat.index} +'\',\''+ ${cart.getCartId()} + '\');'">+</span>
+
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <div>
                                                                 <button class="btn btn-danger text-xl-end"
-                                                                        th:onclick="'deleteCart(\'' + ${cart.id} + '\')'">
-                                                                    >삭제
+                                                                        th:onclick="'deleteCart(\'' + ${cart.getCartId()} + '\')'">
+                                                                    삭제
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -104,58 +109,77 @@
 </th:block>
 
 <script th:inline="javascript">
+    calculateTotalPrice();
 
     // th:onclick="'findOrder(\'' + ${orderId} + '\')'">
     console.log(axios)
 
+    function addQuantity(index, cartId) {
+        let quantity = document.getElementById('quantity' + index).value;
 
-    function addQuantity(cartId) {
-        let quantity = document.getElementById('quantity' + cartId).value;
-        sendUpdateQuantity(cartId, quantity + 1);
+        if(quantity === "") {
+            quantity = 1;
+        }
+        sendUpdateQuantity(index, cartId, parseInt(quantity) + 1);
 
     }
 
-    function minusQuantity(cartId) {
-        let quantity = document.getElementById('quantity' + cartId).value;
-        sendUpdateQuantity(cartId, quantity - 1);
+    function minusQuantity(index, cartId) {
+        let quantity = document.getElementById('quantity' + index).value;
+
+        if(quantity === "1"){
+            alert("최소 1개 이상만 가능합니다.")
+            return;
+        }
+        if(quantity === "") {
+            quantity = 1;
+        }
+        sendUpdateQuantity(index, cartId, parseInt(quantity) - 1);
     }
 
-    function sendUpdateQuantity(cartId, quantity) {
+    function sendUpdateQuantity(index, cartId, quantity) {
         axios
             .post("/user/updateQuantityCart", {
                 quantity: quantity,
                 cartId: cartId
             })
             .then(response => {
-                let savedQuantity = response.data();
-                let price = document.getElementById('price' + cartId).value;
+                let savedQuantity = response.data;
+                let price = document.getElementById('price' + index).innerText;
 
-                document.getElementById('quantity' + cartId).value = savedQuantity;
-                document.getElementById('itemTotalPrice' + cartId).value = parseInt(savedQuantity) * parseInt(price);
+                document.getElementById('quantity' + index).value = savedQuantity;
+                document.getElementById('visibleQuantity' + index).innerHTML = savedQuantity;
+
+                const totalPrice = (parseInt(savedQuantity) * parseInt(price.replace(/,/g , ''))).toLocaleString('ko-KR')
+                document.getElementById('itemTotalPrice' + index).innerHTML = totalPrice;
+
+                calculateTotalPrice();
             });
     }
 
-    function deleteCart(cartId) {
+    function deleteCart(cartId, event) {
         axios
             .post("/user/deleteItemInCart", {
                 cartId: cartId
             })
             .then(response => {
                 alert("삭제 완료 되었습니다.")
+                calculateTotalPrice();
+                window.location = '/user/carts'
             });
     }
 
     function calculateTotalPrice() {
         let totalPrice = 0;
 
-        document.getElementsByClassName("cart")
+        Array.from(document.getElementsByClassName("cart"))
             .forEach((item, index) => {
-                let quantity = document.getElementById("quantity" + index).value;
-                let price = document.getElementById("price" + index).value;
-
-                totalPrice += parseInt(quantity) * parseInt(price);
+                let quantity = document.getElementById("visibleQuantity" + index).innerHTML;
+                document.getElementById('quantity' + index).value = quantity;
+                let price = document.getElementById("price" + index).innerHTML;
+                totalPrice += parseInt(quantity) * parseInt(price.replace(/,/g , ''));
             })
 
-        document.getElementById("totalPrice").value = totalPrice;
+        document.getElementById("totalPrice").innerHTML = totalPrice;
     }
 </script>

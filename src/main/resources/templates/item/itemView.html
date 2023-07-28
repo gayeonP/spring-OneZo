@@ -14,6 +14,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <input type="hidden" name="itemId" th:value="${item.getId()}">
                     <div class="input-group mb-2">
                         <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
                         <button type="submit" class="input-group-text bg-success text-light">
@@ -41,29 +42,28 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="h2" th:text="${item.getName()}"></h1>
-                                <p class="h3 py-2" th:text="${'₩' + item.getPrice()}"></p>
+                                <p class="h3 py-2"
+                                   th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
                                 <p class="py-2">
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-warning"></i>
                                     <i class="fa fa-star text-secondary"></i>
-                                    <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                    <span class="list-inline-item text-dark">평점 4.8 | 36 댓글 수</span>
                                 </p>
-                                <h6>Description:</h6>
+                                <h6>상품상세:</h6>
                                 <p th:text="${item.getItemDetail()}"></p>
-                                <h6>Stock:</h6>
+                                <h6>재고:</h6>
                                 <p th:text="${item.getStock()}"></p>
-                                <h6>Seller:</h6>
+                                <h6>판매자:</h6>
                                 <p th:text="${item.getSellerName()}"></p>
-                                <form method="POST" id="addCart">
+                                <form action="/seller/editItem" method="get" id="addCart">
                                     <div class="row">
                                         <div class="col-auto">
                                             <ul class="list-inline pb-3">
-                                                <li class="list-inline-item text-right">
-                                                    Quantity
-                                                    <input type="hidden" name="quantity" id="quantity"
-                                                           value="1">
+                                                <li class="list-inline-item text-right quantity">
+                                                    수량
                                                 </li>
                                                 <li class="list-inline-item"><span class="btn btn-success"
                                                                                    id="btn-minus">-</span></li>
@@ -76,22 +76,24 @@
                                     </div>
                                     <div class="row pb-3">
                                         <div class="col d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg" name="submit"
+                                            <button type="button" class="btn btn-success btn-lg" name="submit"
                                                     value="buy" th:onclick="">
-                                                Buy
+                                                주문하기
                                             </button>
                                         </div>
                                         <div class="col d-grid">
-                                            <button type="submit" class="btn btn-success btn-lg"
-                                                    th:onclick="'addCart(\'' + ${item.getId()} + '\')'">
-                                                Add To Cart
+                                            <button class="btn btn-success btn-lg" type="button"
+                                                    th:onclick="'javascript:addCart(\'' + ${item.getId()} + '\')'">
+                                                장바구니 담기
                                             </button>
                                         </div>
                                         <div class="col d-grid">
                                             <button class="btn btn-success btn-lg"
-                                                    type="submit" th:if="${user != null && user.getUserId() == item.getSellerId()}"
-                                                    th:onclick="'goEdit(\'' + ${item.getId()} +'\')'">
-                                                수정</button>
+                                                    type="submit"
+                                                    th:if="${user != null && user.getUserId() == item.getSellerId()}"
+                                                    th:onclick="'javascript:goEdit(\'' + ${item.getId()} +'\')'">
+                                                수정
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -226,13 +228,25 @@
 </th:block>
 
 <script th:inline="javascript">
-    let quantity = document.getElementById("quantity").value;
+    let quantity = document.getElementById("var-value").innerHTML;
     var form = document.getElementById("addCart");
+
     function addCart(itemId) {
-        form.action = '/user/createCart/'+itemId;
+        axios.post("/user/createCart",
+            {itemId: itemId,
+            quantity: quantity
+            })
+            .then(response => {
+                let answer = confirm('장바구니에 담았습니다. 장바구니로 이동하겠습니까?');
+                if (answer === true) {
+                    window.location.href = "/user/carts";
+                    return;
+                }
+                window.location.href = 'item?itemId=' + itemId;
+            });
     }
+
     function goEdit(itemId) {
-        form.action = '/seller/editItem/' + itemId;
-        form.method = 'GET';
+        window.location.href = '/seller/editItem?itemId' + itemId;
     }
 </script>
