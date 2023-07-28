@@ -29,37 +29,37 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-3">
-                    <h1 class="h2 pb-4">Categories</h1>
+                    <h1 class="h2 pb-4">상품분류</h1>
                     <ul class="list-unstyled templatemo-accordion">
                         <li class="pb-3">
                             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                                Gender
+                                성별
                                 <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                             </a>
                             <ul class="collapse show list-unstyled pl-3">
-                                <li><a class="text-decoration-none" href="#">Men</a></li>
-                                <li><a class="text-decoration-none" href="#">Women</a></li>
+                                <li><a class="text-decoration-none" href="#">남자</a></li>
+                                <li><a class="text-decoration-none" href="#">여자</a></li>
                             </ul>
                         </li>
                         <li class="pb-3">
                             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                                Sale
+                                세일중
                                 <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                             </a>
                             <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                                <li><a class="text-decoration-none" href="#">Sport</a></li>
-                                <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                                <li><a class="text-decoration-none" href="#">스포츠</a></li>
+                                <li><a class="text-decoration-none" href="#">럭셔리</a></li>
                             </ul>
                         </li>
                         <li class="pb-3">
                             <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                                Product
+                                상품
                                 <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
                             </a>
                             <ul id="collapseThree" class="collapse list-unstyled pl-3">
-                                <li><a class="text-decoration-none" href="#">Bag</a></li>
-                                <li><a class="text-decoration-none" href="#">Sweather</a></li>
-                                <li><a class="text-decoration-none" href="#">Sunglass</a></li>
+                                <li><a class="text-decoration-none" href="#">가방</a></li>
+                                <li><a class="text-decoration-none" href="#">스웨트셔츠</a></li>
+                                <li><a class="text-decoration-none" href="#">악세사리</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -136,7 +136,7 @@
                                 <li class="page-item" th:if="${items.getPageInfo().isHasPrevious()}">
                                     <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
                                        th:href="${'items?page=' + (items.getPageInfo().getFirstNumber() - 2)}">
-                                        Prev
+                                        이전
                                     </a>
                                 </li>
                                 <th:block
@@ -154,7 +154,7 @@
                                 <li class="page-item" th:if="${items.getPageInfo().isHasNext()}">
                                     <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
                                        th:href="${'items?page=' + items.getPageInfo().getLastNumber()}">
-                                        Next
+                                        다음
                                     </a>
                                 </li>
                             </ul>

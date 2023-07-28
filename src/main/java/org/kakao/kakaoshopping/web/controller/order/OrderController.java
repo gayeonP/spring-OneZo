@@ -101,12 +101,13 @@ public class OrderController {
 	 */
 	@GetMapping("/orders")
 	public String findOrders(@LoginUser LoggedInUser loggedInUser, OrderSearchCondition condition, Model model) {
+		condition.setMemberId(loggedInUser.getUserId());
 		Page<Order> orders = orderService.findOrders(condition);
 
 		List<OrderSimpleView> orderViews = orders.getContent().stream()
 			.map(OrderSimpleView::new)
 			.toList();
-
+		model.addAttribute("orders", orderViews);
 		return "order/orderViews";
 	}
 

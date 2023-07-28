@@ -92,13 +92,16 @@
                 </div>
                 <div>
                     <!--<div style="display: flex; align-items: center; top: 0; position: sticky;">-->
-                    <div style="display: flex; align-items: center; top: 70%; position: sticky; flex-direction: column">
+                    <div style="display: flex; align-items: center; top: 60%; position: sticky; flex-direction: column; border: 1px solid black; padding: 10px;">
                         <div class="mt-4 mx-lg-5">
                             <strong class=" fa-lg">
-                                총 주문가격 : <span id="totalPrice">15000</span>원
+                                총 주문가격
+                                <br>
+                                <br>
+                                <span id="totalPrice">15000</span>
                             </strong>
                         </div>
-                        <div>
+                        <div style="display: flex; justify-content: end">
                             <button class="btn btn-primary mt-3" id="checkout-btn">주문하기</button>
                         </div>
                     </div>
@@ -158,6 +161,8 @@
     }
 
     function deleteCart(cartId, event) {
+        if(confirm("정말로 삭제하겠습니까?") === false)
+            return;
         axios
             .post("/user/deleteItemInCart", {
                 cartId: cartId
@@ -180,6 +185,16 @@
                 totalPrice += parseInt(quantity) * parseInt(price.replace(/,/g , ''));
             })
 
-        document.getElementById("totalPrice").innerHTML = totalPrice;
+        let formattedTotalPrice = '₩ ' + totalPrice.toLocaleString() + ' 원';
+        document.getElementById("totalPrice").innerHTML = formattedTotalPrice
     }
+
+    // 버튼 요소 가져오기
+    const checkoutBtn = document.getElementById("checkout-btn");
+
+    // 클릭 이벤트 핸들러 등록
+    checkoutBtn.addEventListener("click", function() {
+        // 페이지 이동
+        window.location.href = "http://localhost:8080/order/form";
+    });
 </script>

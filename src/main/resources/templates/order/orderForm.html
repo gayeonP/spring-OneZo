@@ -10,6 +10,7 @@
             <div style="display:flex;">
                 <div class="row" style="flex-grow: 2;">
                     <div class="col-md-12">
+                        <section class="bg-light">
                         <h2 class="mb-3">Shopping Cart</h2>
                         <div class="card">
                             <div class="card-body">
@@ -46,6 +47,7 @@
                                 </form>
                             </div>
                         </div>
+                        </section>
                     </div>
                 </div>
                 <div>
@@ -61,15 +63,15 @@
                                                     <h1 class="h2">주문 정보 입력</h1>
                                                     <form action="/order/create" method="post">
                                                         <label for="zipCode">우편번호</label><br>
-                                                        <input type="text" id="zipCode" name="zipCode" required>
+                                                        <input style="width: 100%" type="text" id="zipCode" name="zipCode" required>
                                                         <br>
 
                                                         <label for="city">주소</label><br>
-                                                        <input type="text" id="city" name="city" required>
+                                                        <input style="width: 100%" type="text" id="city" name="city" required>
                                                         <br>
 
                                                         <label for="street">상세주소</label><br>
-                                                        <input type="text" id="street" name="street" required>
+                                                        <input style="width: 100%" type="text" id="street" name="street" required>
                                                         <br>
 
                                                         <label for="headNumber" class="form-label">전화번호</label>
@@ -87,7 +89,7 @@
                                                         </div>
                                                         <label for="deliveryRequest">배송 요청사항:</label>
                                                         <br>
-                                                        <textarea id="deliveryRequest"
+                                                        <textarea style="width: 100%" id="deliveryRequest"
                                                                   name="deliveryRequest"></textarea>
                                                         <br>
 
@@ -104,7 +106,7 @@
                                                                 총 주문가격 : <span id="total-price"></span>원
                                                             </strong>
                                                         </div>
-                                                        <div>
+                                                        <div style="display: flex; justify-content: flex-end;">
                                                             <button type="submit" class="btn btn-primary mt-3" id="checkout-btn">주문하기</button>
                                                         </div>
 
