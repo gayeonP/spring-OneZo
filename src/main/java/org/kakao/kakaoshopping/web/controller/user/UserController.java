@@ -61,7 +61,7 @@ public class UserController {
 			validResult.forEach(
 				(key, value) -> model.addAttribute(key, value));
 
-			return "user/join";
+			return "user/joinProc";
 		}
 		userService.createUser(createUser.toEntity());
 		return "redirect:/joinSuccess";

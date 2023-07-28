@@ -61,9 +61,10 @@ public class Cart {
 		this.orderStatus = orderStatus;
 	}
 
-	@Builder(builderMethodName = "toEdit")
-	public Cart(Integer quantity, OrderStatus orderStatus) {
+	@Builder(builderMethodName = "toEdit", buildMethodName = "editBuild")
+	public Cart(Integer quantity, OrderStatus orderStatus, Long id) {
 		this.quantity = quantity;
 		this.orderStatus = orderStatus;
+		this.id = id;
 	}
 }

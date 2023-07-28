@@ -33,28 +33,30 @@
                             <div class="card-body">
                                 <h1 class="h2">상품 수정</h1>
                                 <form method="POST" id="editItem">
+                                    <input type="hidden" name="itemId" th:value="${item.getId()}">
                                     <div class="form-group">
                                         <label for="product-name">상품 이름</label>
-                                        <input type="text" class="form-control" id="product-name" name="product-name"
+                                        <input type="text" class="form-control" id="product-name" name="name"
                                                required th:value="${item.getName()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="product-price">가격</label>
                                         <input type="number" step="0.01" class="form-control" id="product-price"
-                                               name="product-price" required th:value="${item.getPrice()}">
+                                               name="price" required th:value="${item.getPrice()}"
+                                        min="0" max="1000000000">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="product-description">상품 재고</label>
                                         <input type="number" step="1" class="form-control" id="product-stock"
-                                               name="product-price" required th:value="${item.getStock()}">
+                                               name="stock" required th:value="${item.getStock()}">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="product-description">상품 상세</label>
                                         <textarea class="form-control" id="product-description"
-                                                  name="product-description"
+                                                  name="itemDetail"
                                                   rows="4" required th:value="${item.getItemDetail()}"></textarea>
                                     </div>
 
@@ -76,7 +78,7 @@
 <script>
     var form = document.getElementById("editItem");
     function editItem(itemId) {
-        form.action = "/seller/editItem/" + itemId;
+        form.action = "/seller/editItem";
     }
     function deleteItem(itemId) {
         form.action = "/seller/deleteItem/" + itemId;

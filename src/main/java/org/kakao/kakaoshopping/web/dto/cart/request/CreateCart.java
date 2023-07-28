@@ -16,7 +16,7 @@ import org.kakao.kakaoshopping.domain.enums.OrderStatus;
 @AllArgsConstructor
 public class CreateCart {
     private Integer quantity;
-
+    private Long itemId;
     public Cart toEntity() {
         return Cart.builder()
                 .orderStatus(OrderStatus.N)
