@@ -57,12 +57,13 @@ public class CartController {
    */
   @GetMapping("/carts")
   public String viewCarts(Model model, @LoginUser LoggedInUser loggedInUser) {
-      List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
-      List<CartSimpleView> cartSimpleView = carts.stream().map(CartSimpleView::new)
-                      .toList();
-      model.addAttribute("carts", cartSimpleView);
-      return "cart/cartViews";
+	  List<Cart> carts = cartService.getItemsInCart(loggedInUser.getUserId());
+	  List<CartSimpleView> cartSimpleView = carts.stream().map(CartSimpleView::new)
+		  .toList();
+	  model.addAttribute("carts", cartSimpleView);
+	  return "cart/cartViews";
   }
+
 
   /**
    * 기능: 장바구니 안 아이템을 삭제한다.
@@ -93,18 +94,18 @@ public class CartController {
       return "redirect:/user/carts";
   }
 
-  /**
-   * 기능: 장바구니 아이템 수량을 업데이트한다.
-   * 작성자 - 박가연
-   * 작성일 - 2023.07.25
-   *
-   * @param editCart
-   * @return String
-   */
-  @PostMapping("/updateQuantityCart")
-  @ResponseBody
-  public ResponseEntity<Integer> updateQuantityCart(@RequestBody EditCart editCart) {
-      Integer savedQuantity = cartService.updateCart(editCart.toEntity());
-      return ResponseEntity.ok(savedQuantity);
-  }
+	// 장바구니 수량 업데이트
+	@PostMapping("/updateQuantityCart")
+	@ResponseBody
+	public ResponseEntity<Integer> updateQuantityCart(@RequestBody EditCart editCart) {
+		Integer savedQuantity = cartService.updateCart(editCart.toEntity());
+		return ResponseEntity.ok(savedQuantity);
+	}
+
+	@GetMapping("/orderForm")
+	public String test(List<CartToOrder> carts) {
+		// DB 가서 아이템 조회 후, 주문에 필요한 정보를 dto에 담아서\
+		// 뷰로 전달해 주면 된다.
+		return "cart/cartViews";
+	}
 }

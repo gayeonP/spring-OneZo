@@ -16,6 +16,7 @@ public class CartSimpleView {
 	private Integer quantity;
 	private Long itemId;
 	private String imagePath;
+  
 	public CartSimpleView(Cart cart){
 		this.cartId = cart.getId();
 		this.name = cart.getItem().getName();
@@ -25,5 +26,4 @@ public class CartSimpleView {
 		this.imagePath = cart.getItem().getImagePath();
 	}
 }
-
 
