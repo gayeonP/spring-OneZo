@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="|주문 완료|"/>
+    <th:block th:fragment="content">
+        <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row p-5" style="justify-content: center;">
+                            <div class="col-lg-6 mb-0 d-flex align-items-center" style="justify-content: center;">
+                                <div class="text-align-center align-self-center">
+                                    <!--센터글-->
+                                    <h1 class="h1">주문이 완료 되었습니다!</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-5" style="justify-content: center;">
+                            <div class="col-lg-6 mb-0 d-flex align-items-center" style="justify-content: center;">
+                                <div class="text-align-center align-self-center">
+                                    <button class="btn btn-primary btn-sub"
+                                            th:onclick="'findOrder(\'' + ${orderId} + '\')'">
+                                        주문 확인하기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+    function findOrder(orderId) {
+        window.location.href = '/order?orderId=' + orderId;
+    }
+</script>

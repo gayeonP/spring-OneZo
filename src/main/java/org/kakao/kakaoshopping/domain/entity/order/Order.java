@@ -13,11 +13,13 @@ import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.enums.CancelStatus;
 import org.kakao.kakaoshopping.domain.enums.PayStatus;
 import org.kakao.kakaoshopping.domain.enums.Payment;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -38,6 +40,7 @@ import lombok.Setter;
 @Table(name = "ORDER_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(value = {AuditingEntityListener.class})
 public class Order {
 
 	@Id
@@ -64,6 +67,7 @@ public class Order {
 	private LocalDateTime orderDate;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Setter
 	private List<OrderItem> orderItems = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -88,7 +92,6 @@ public class Order {
 		}
 		orderItem.setOrder(this);
 		orderItems.add(orderItem);
-		System.out.println("orderItem = " + orderItem);
 	}
 
 	public void edit(Order order) {

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
+    <title>상품 상세</title>
+    <th:block th:fragment="content">
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <input type="hidden" name="itemId" th:value="${item.getId()}">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Open Content -->
+        <section class="bg-light">
+            <div class="container pb-5">
+                <div class="row">
+                    <div class="col-lg-5 mt-5">
+                        <div class="card mb-3">
+                            <img class="card-img img-fluid" th:src="${item.getImagePath()}"
+                                 alt="Card image cap"
+                                 id="product-detail">
+                        </div>
+                    </div>
+                    <!-- col end -->
+                    <div class="col-lg-7 mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="h2" th:text="${item.getName()}"></h1>
+                                <p class="h3 py-2"
+                                   th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
+                                <p class="py-2">
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-secondary"></i>
+                                    <span class="list-inline-item text-dark">평점 4.8 | 36 댓글 수</span>
+                                </p>
+                                <h6>상품상세:</h6>
+                                <p th:text="${item.getItemDetail()}"></p>
+                                <h6>재고:</h6>
+                                <p th:text="${item.getStock()}"></p>
+                                <h6>판매자:</h6>
+                                <p th:text="${item.getSellerName()}"></p>
+                                <form method="get" th:action="@{/seller/editItem(itemId='2')}" id="addCart">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <ul class="list-inline pb-3">
+                                                <li class="list-inline-item text-right quantity">
+                                                    수량
+                                                </li>
+                                                <li class="list-inline-item"><span class="btn btn-success"
+                                                                                   id="btn-minus">-</span></li>
+                                                <li class="list-inline-item"><span class="badge bg-secondary"
+                                                                                   id="var-value">1</span></li>
+                                                <li class="list-inline-item"><span class="btn btn-success"
+                                                                                   id="btn-plus">+</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="col d-grid">
+                                            <button type="button" class="btn btn-success btn-lg" name="submit"
+                                                    value="buy" th:onclick="">
+                                                주문하기
+                                            </button>
+                                        </div>
+                                        <div class="col d-grid">
+                                            <button class="btn btn-success btn-lg" type="button"
+                                                    th:onclick="'javascript:addCart(\'' + ${item.getId()} + '\')'">
+                                                장바구니 담기
+                                            </button>
+                                        </div>
+                                        <div class="col d-grid">
+                                            <a class="btn btn-success btn-lg"
+                                               th:href="@{/seller/editItem(itemId=${item.getId()})}"
+                                               th:if="${user != null && user.getUserId() == item.getSellerId()}">수정</a>
+
+<!--                                            <button class="btn btn-success btn-lg"-->
+<!--                                                    type="button"-->
+<!--                                                    th:if="${user != null && user.getUserId() == item.getSellerId()}">-->
+<!--                                                <a class="btn btn-success btn-lg" th:href="@{/seller/editItem(itemId=${item.getId()})}">수정</a>-->
+<!--                                            </button>-->
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Close Content -->
+
+        <!-- Product Reviews -->
+        <section class="bg-light">
+            <div class="container py-5">
+                <h2 class="h3 pb-3">Product Reviews</h2>
+
+                <!-- Single Review -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">John Doe</h5>
+                        <p class="mb-0">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-secondary"></i>
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut
+                            labore et
+                            dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed
+                            orci a
+                            diam ultrices aliquet interdum quis nulla.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Single Review -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">Jane Smith</h5>
+                        <p class="mb-0">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                        </p>
+                        <p>
+                            This activewear is amazing! Fits perfectly and looks great. Highly recommended!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Add your review form -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">Leave a Review</h5>
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="user-name">Your Name:</label>
+                                <input type="text" class="form-control" id="user-name" name="user-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-rating">Rating:</label>
+                                <select class="form-control" id="user-rating" name="user-rating" required>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="1">1 Star</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-review">Your Review:</label>
+                                <textarea class="form-control" id="user-review" name="user-review" rows="4"
+                                          required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Review</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Questions and Answers -->
+        <section class="bg-light">
+            <div class="container py-5">
+                <h2 class="h3 pb-3">Product Questions and Answers</h2>
+
+                <!-- Single Question and Answer -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">Mary Johnson</h5>
+                        <p class="mb-0">Q: Is this activewear suitable for running?</p>
+                        <p class="text-muted">A: Yes, it's designed for running and other active sports.</p>
+                    </div>
+                </div>
+
+                <!-- Single Question and Answer -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">David Lee</h5>
+                        <p class="mb-0">Q: What materials is it made of?</p>
+                        <p class="text-muted">A: It's made of a lightweight and breathable polyester fabric.</p>
+                    </div>
+                </div>
+
+                <!-- Add your question form -->
+                <div class="media pb-4">
+                    <div class="media-body">
+                        <h5 class="mt-0">Ask a Question</h5>
+                        <form action="" method="post">
+                            <div class="form-group">
+                                <label for="user-name">Your Name:</label>
+                                <input type="text" class="form-control" id="user-name" name="user-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-question">Your Question:</label>
+                                <textarea class="form-control" id="user-question" name="user-question" rows="4"
+                                          required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Question</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </th:block>
+</th:block>
+
+<script th:inline="javascript">
+    var form = document.getElementById("addCart");
+
+    function addCart(itemId) {
+        let quantity = document.getElementById("var-value").innerHTML;
+        console.log(quantity);
+        axios.post("/user/createCart",
+            {
+                itemId: itemId,
+                quantity: quantity
+            })
+            .then(response => {
+                let answer = confirm('장바구니에 담았습니다. 장바구니로 이동하겠습니까?');
+                if (answer === true) {
+                    window.location.href = "/user/carts";
+                    return;
+                }
+                window.location.href = 'item?itemId=' + itemId;
+            });
+    }
+
+    // function goEdit(itemId, event) {
+    //     // event.preventDefault();
+    //     // const input = "<input type='hidden' name='itemId' value='" + itemId + "'>";
+    //     // form.action = '/seller/editItem'
+    //     // form.method = 'GET'
+    //     // form.append(input);
+    //     // form.submit();
+    //     // form.action = '/seller/editItem?itemId=' + itemId;
+    //     // form.method = 'GET';
+    //     // form.submit();
+    // }
+</script>

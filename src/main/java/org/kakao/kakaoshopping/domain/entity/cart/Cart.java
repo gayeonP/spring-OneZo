@@ -2,23 +2,15 @@ package org.kakao.kakaoshopping.domain.entity.cart;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
 import org.kakao.kakaoshopping.domain.entity.annotation.CustomCreateDate;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
 import org.kakao.kakaoshopping.domain.entity.user.User;
 import org.kakao.kakaoshopping.domain.enums.OrderStatus;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +19,7 @@ import lombok.Setter;
 @Table(name = "CART_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(value = {AuditingEntityListener.class})// 엔티티가 변경되는 것을 감지하는 리스너
 public class Cart {
 
 	@Id
@@ -43,17 +36,35 @@ public class Cart {
 	@Setter
 	private Item item;
 
-	@Column(columnDefinition = "TEXT DEFAULT ''", nullable = false)
-	private String contents;
-
 	@Column(nullable = false)
+	@Setter
 	private Integer quantity;
 
 	@Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'", nullable = false)
 	@Enumerated(EnumType.STRING)
+	@Setter
 	private OrderStatus orderStatus;
 
 	@CustomCreateDate
-	@Column(nullable = false)
+	@Column(nullable = false, updatable = false)
 	private LocalDateTime regDate;
+
+	public void editCart(Cart cart) {
+		this.quantity = cart.getQuantity();
+	}
+
+	@Builder
+	public Cart(User user, Item item, Integer quantity, OrderStatus orderStatus) {
+		this.user = user;
+		this.item = item;
+		this.quantity = quantity;
+		this.orderStatus = orderStatus;
+	}
+
+	@Builder(builderMethodName = "toEdit", buildMethodName = "editBuild")
+	public Cart(Integer quantity, OrderStatus orderStatus, Long id) {
+		this.quantity = quantity;
+		this.orderStatus = orderStatus;
+		this.id = id;
+	}
 }

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문상세"/>
+    <th:block th:fragment="content">
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h1 class="h2 pb-4">상품분류</h1>
+                    <ul class="list-unstyled templatemo-accordion">
+                        <li class="pb-3">
+                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                                성별
+                                <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            </a>
+                            <ul class="collapse show list-unstyled pl-3">
+                                <li><a class="text-decoration-none" href="#">남자</a></li>
+                                <li><a class="text-decoration-none" href="#">여자</a></li>
+                            </ul>
+                        </li>
+                        <li class="pb-3">
+                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                                세일중
+                                <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            </a>
+                            <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                                <li><a class="text-decoration-none" href="#">스포츠</a></li>
+                                <li><a class="text-decoration-none" href="#">럭셔리</a></li>
+                            </ul>
+                        </li>
+                        <li class="pb-3">
+                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                                상품
+                                <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            </a>
+                            <ul id="collapseThree" class="collapse list-unstyled pl-3">
+                                <li><a class="text-decoration-none" href="#">가방</a></li>
+                                <li><a class="text-decoration-none" href="#">스웨트셔츠</a></li>
+                                <li><a class="text-decoration-none" href="#">악세사리</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-inline shop-top-menu pb-3 pt-1">
+                                <li class="list-inline-item">
+                                    <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 pb-4" style="text-align: right">
+                            <form action="/seller/createItem">
+                                <button th:if="${session.loggedInUser != null && session.loggedInUser.getUserType().name().equals('SELLER')}"
+                                        type="submit" class="btn btn-primary">상품등록
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" th:each="item: ${items.getList()}">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid" style="min-height: 212px" th:if="${item.getImagePath()==null}" src="https://newsimg.sedaily.com/2021/04/08/22L06CUBC8_2.png">
+                                    <img class="card-img rounded-0 img-fluid" style="min-height: 212px" th:unless="${item.getImagePath()==null}" th:src="${item.getImagePath()}">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-success text-white" onclick="alert('준비중')"><i
+                                                    class="far fa-heart"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2"
+                                                   th:onclick="'javascript:addCart(\'' + ${item.getId()} + '\')'"><i
+                                                    class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="min-height:15rem">
+                                    <a th:href="${'/item?itemId=' + item.getId()}" class="h3 text-decoration-none"
+                                       th:text="${item.getName()}"></a>
+                                    <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                        <li class="pt-2">
+                                            <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                            <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                            <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                            <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                            <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                        <li>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-warning fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                        </li>
+                                    </ul>
+                                    <p class="text-center mb-0"
+                                       th:text="${'₩ ' + #numbers.formatInteger(item.getPrice(),3,'COMMA')}"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <ul class="pagination pagination-lg justify-content-end">
+                                <li class="page-item" th:if="${items.getPageInfo().isHasPrevious()}">
+                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
+                                       th:href="${'items?page=' + (items.getPageInfo().getFirstNumber() - 2)}">
+                                        이전
+                                    </a>
+                                </li>
+                                <th:block
+                                        th:each="status: ${#numbers.sequence(items.getPageInfo().getFirstNumber(),
+                                        items.getPageInfo().getLastNumber())}">
+                                    <li class="page-item"
+                                        th:classappend="${items.getPageInfo().getPageNumber() == status - 1} ? 'disabled' : ''">
+                                        <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
+                                           th:classappend="${items.getPageInfo().getPageNumber() == status - 1} ? 'active' : ''"
+                                           th:href="${'/items?page=' + (status - 1)}"
+                                           th:value="${items.getPageInfo().getPageNumber()}"
+                                           th:text="${status}"></a>
+                                    </li>
+                                </th:block>
+                                <li class="page-item" th:if="${items.getPageInfo().isHasNext()}">
+                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark"
+                                       th:href="${'items?page=' + items.getPageInfo().getLastNumber()}">
+                                        다음
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </th:block>
+</th:block>
+<script>
+    function addCart(itemId) {
+        axios.post("/user/createCart",
+            {
+                itemId: itemId,
+                quantity: "1"
+            })
+            .then(response => {
+                let answer = confirm('장바구니에 담았습니다. 장바구니로 이동하겠습니까?');
+                if (answer === true) {
+                    window.location = "/user/carts";
+                }
+            });
+    }
+</script>
+</html>
+
+

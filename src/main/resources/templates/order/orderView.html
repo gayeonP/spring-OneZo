@@ -1,9 +1,70 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<!--/* 마치 인클루드처럼, basic 레이아웃을 1개 만들고 내부의 화면은 따로 매개변수처럼 넣어줌 */-->
-<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문상세"/>
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="|주문 상세 페이지|"/>
     <th:block th:fragment="content">
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header" style="display: flex; justify-content: space-between;">
+                                    <div>
+                                        <h3 class="mb-0">주문 상세</h3>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-danger btn-sub"
+                                                th:onclick="'deleteOrder(\'' + ${order.id} + '\')'">
+
+                                            주문 삭제
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="order-details">
+                                    <p>주문일자: <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd')}"/></p>
+                                    <p>전화번호: <span th:text="${order.phoneNumber}"/></p>
+                                    <p>주소: <span th:text="${'(' + order.zipCode + ') ' + order.city + order.street}"/>
+                                    </p>
+                                    <p>결제수단: 신용카드 </p>
+
+                                   <span th:text="${'주문가격 : ₩ ' + #numbers.formatInteger(order.getTotalPrice(), 3, 'COMMA') + ' 원'}" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <th:block th:each="orderItem : ${order.orderItems}">
+                                <!--<tr th:onclick="'modify(\'' + ${dto.cfno} + '\')'">-->
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">[[${orderItem.itemName}]]</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>수량 : [[${orderItem.quantity}]]</p>
+                                        <span th:text="${'단가 : ₩ ' + #numbers.formatInteger(orderItem.getPrice(), 3, 'COMMA') + '원'}" />
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </th:block>
 </th:block>
+
+<script th:inline="javascript">
+    function deleteOrder(orderId) {
+        if (confirm("선택한 주문을 삭제하시겠습니까?")) {
+            window.location.href = '/order/delete?orderId=' + orderId;
+        }
+    }
+</script>

@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import org.kakao.kakaoshopping.domain.entity.BaseEntity;
 import org.kakao.kakaoshopping.domain.entity.annotation.CustomCreateDate;
 import org.kakao.kakaoshopping.domain.entity.item.Item;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,14 @@ import lombok.Setter;
 @Table(name = "ORDER_ITEM_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(value = {AuditingEntityListener.class})
+/**
+ * 기능 : 주문 상품에 대한 엔티티
+ * 작성자 - 장원준
+ * 작성일 - 2023.07.20
+ * 수정자 - 임창준
+ * 수정일 - 2023.07.21
+ */
 public class OrderItem extends BaseEntity {
 
 	@Id

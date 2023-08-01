@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="주문상세"/>
+    <th:block th:fragment="content">
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- -Start Content -->
+        <div class="container py-5">
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <h1 class="h2 pb-4">My Page</h1>
+                    <ul class="list-unstyled templatemo-accordion">
+                        <li class="pb-3">
+                            <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                                Information
+                                <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            </a>
+                            <ul class="collapse show list-unstyled pl-3">
+                                <li><a class="text-decoration-none" href="#">Edit</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-9">
+                    <h2 class="pb-4">Edit User Information</h2>
+                    <form action="/update_user" method="POST">
+                        <div class="form-group">
+                            <label for="user-email">Name:</label>
+                            <a>Afijqwoifjias</a>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-email">Email:</label>
+                            <input type="email" class="form-control" id="user-email" name="user-email"
+                                   value="user@example.com"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password">Password:</label>
+                            <input type="password" class="form-control" id="user-password" name="user-password"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-nickname">Nickname:</label>
+                            <input type="text" class="form-control" id="user-nickname" name="user-nickname"
+                                   value="johnd"
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-phone">Phone Number:</label>
+                            <input type="tel" class="form-control" id="user-phone" name="user-phone"
+                                   value="123-456-7890"
+                                   required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Information</button>
+                    </form>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <!-- End Content -->
+    </th:block>
+</th:block>
+
+

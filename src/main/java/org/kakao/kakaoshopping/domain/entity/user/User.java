@@ -14,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,9 @@ public class User extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(columnDefinition = "VARCHAR(20)", nullable = false, unique = true)
+	private String userId;
 
 	@Column(columnDefinition = "VARCHAR(50)", nullable = false, unique = true)
 	private String email;
@@ -45,4 +49,17 @@ public class User extends BaseEntity {
 	@Column(columnDefinition = "VARCHAR(20)", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
+
+	@Builder
+	public User(String email, String userLoginId, String password, String name, String nickname,
+		PhoneNumber phoneNumber,
+		UserType userType) {
+		this.email = email;
+		this.userId = userLoginId;
+		this.password = password;
+		this.name = name;
+		this.nickname = nickname;
+		this.userType = userType;
+		this.phoneNumber = phoneNumber;
+	}
 }

@@ -21,6 +21,6 @@ public abstract class BaseEntity {
 	protected LocalDateTime regDate;
 
 	@CustomLastModifiedDate
-	@Column(nullable = false)
+	@Column
 	protected LocalDateTime modDate;
 }

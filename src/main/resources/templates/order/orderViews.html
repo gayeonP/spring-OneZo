@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<!--/* 마치 인클루드처럼, basic 레이아웃을 1개 만들고 내부의 화면은 따로 매개변수처럼 넣어줌 */-->
-<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
-    <title th:text="주문목록"/>
+
+<th:block th:replace="~{/layout/headerLayout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="|주문 목록|"/>
     <th:block th:fragment="content">
+        <!-- Start Content -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <th:block th:each="order : ${orders}">
+                                <div class="card mb-3">
+                                    <div class="card-header" style="display: flex; justify-content: space-between;">
+                                        <div>
+                                            <h5 class="mb-0">주문일자: <span
+                                                    th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd')}"/></h5>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-sm btn-primary btn-sub"
+                                                    th:onclick="'findOrder(\'' + ${order.id} + '\')'">
+
+                                                상세 보기
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" id="order-details">
+                                        <p>주문 건수: <span th:text="${order.orderItems.size()}"/>건</p>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </th:block>
 </th:block>
+
+<script th:inline="javascript">
+    function findOrder(orderId) {
+        window.location.href = '/order?orderId=' + orderId;
+    }
+</script>

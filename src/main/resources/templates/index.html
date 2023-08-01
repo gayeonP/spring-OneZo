@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:replace="~{/layout/layout :: setContent(~{::title}, ~{this::content})}">
+    <title th:text="205번가"/>
+    <th:block th:fragment="content">
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Start Banner Hero -->
+        <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid"
+                                     src="https://image.zdnet.co.kr/2023/06/20/fc3e79bc5f156e917dc92b2b8758c1d1.jpg"
+                                     alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left align-self-center">
+                                    <!--센터글-->
+                                    <h1 class="h1"><b>iPhone</b> 12:00까지</h1>
+                                    <h3 class="h2">iPhone은 205번가에서 만나요.</h3>
+                                    <p>
+                                        놓치지 마세요! 한정판매
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid"
+                                     src="https://cdn.011st.com/11dims/resize/300/11src/dl/v2/2/7/4/5/0/3/HAten/2423274503_148626444_05.jpg"
+                                     alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                    <h1 class="h1">제주농협 하우스감귤</h1>
+                                    <h3 class="h2">[농협카드15%]</h3>
+                                    <p>
+                                        오늘 주문 내일 도착!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel"
+               role="button" data-bs-slide="prev">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel"
+               role="button" data-bs-slide="next">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        <!-- End Banner Hero -->
+
+
+        <!-- Start Categories of The Month -->
+        <section class="container py-5">
+            <div class="row text-center pt-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">이번달 추천상품</h1>
+                    <p>
+                        어머 이건 꼭 사아해!
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a th:href="@{/item(itemId=25)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/dl/23/9/6/9/4/8/9/qsQqk/5997969489_148625188_05.jpg"
+                            class="rounded-circle img-fluid border"></a>
+                    <h5 class="text-center mt-3 mb-3">Cloth</h5>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a th:href="@{/item(itemId=8)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/product/5609836062/L300.jpg?377000000"
+                            class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3">food</h2>
+                </div>
+                <div class="col-12 col-md-4 p-5 mt-3">
+                    <a th:href="@{/item(itemId=21)}"><img
+                            src="https://cdn.011st.com/11dims/resize/300/11src/dl/23/1/2/2/2/0/6/kkyLK/5753122206_148581635_05.png"
+                            class="rounded-circle img-fluid border"></a>
+                    <h2 class="h5 text-center mt-3 mb-3">gift card</h2>
+                </div>
+            </div>
+        </section>
+        <!-- End Categories of The Month -->
+
+
+        <!-- Start Featured Product -->
+        <section class="bg-light">
+            <div class="container py-5">
+                <div class="row text-center py-3">
+                    <div class="col-lg-6 m-auto">
+                        <h1 class="h1">획기적인 상품</h1>
+                        <p>
+                            획기적인 이벤트 중인 상품입니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <a th:href="@{/item(itemId=24)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/product/3895642295/L300.jpg?349000000"
+                                     class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <ul class="list-unstyled d-flex justify-content-between">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                    `
+                                    <li class="text-muted text-right">$240.00</li>
+                                </ul>
+                                <a th:href="@{/item(itemId=24)}" class="h2 text-decoration-none text-dark">씨그램 350mL
+                                    30개</a>
+                                <p class="card-text">
+                                    160년 전통의 브랜드 씨그램에서 선보이는 상쾌한 Flavored Sparkling Water!
+                                </p>
+                                <p class="text-muted">Reviews (24)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <a th:href="@{/item(itemId=22)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/product/5820621041/L300.jpg?312000000"
+                                     class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <ul class="list-unstyled d-flex justify-content-between">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                    <li class="text-muted text-right">$480.00</li>
+                                </ul>
+                                <a th:href="@{/item(itemId=22)}" class="h2 text-decoration-none text-dark">베베숲 시그니처 그린
+                                    20개</a>
+                                <p class="card-text">
+                                    물티슈는 베베숲만 써요그린 블루 베이지 다 써봤는데 크게 차이 없어서 할인하면 그냥 뜬 제품 바로 20개씩 쟁여놔요~청소든 뭐든 다 도톰해서 좋고
+                                    물기도 촉촉해서 좋아요 간혹 2-3장씩 나올때도 있지만~~ 다시 넣어둬요;;
+                                </p>
+                                <p class="text-muted">Reviews (48)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <div class="card h-100">
+                            <a th:href="@{/item(itemId=20)}">
+                                <img src="https://cdn.011st.com/11dims/resize/300/11src/dl/v2/1/7/2/0/4/2/DQBUM/6006172042_148602964_05.jpg"
+                                     class="card-img-top" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <ul class="list-unstyled d-flex justify-content-between">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                    </li>
+                                    <li class="text-muted text-right">$360.00</li>
+                                </ul>
+                                <a th:href="@{/item(itemId=20)}" class="h2 text-decoration-none text-dark">리솜 3개지점 성수기
+                                    얼리버드 판매</a>
+                                <p class="card-text">
+                                    비가 와서 춥다보니 외부에선 못놀고 내부에서만 놀았는데 물도 따뜻하고 재밌게 잘 놀았네요 이용객들 많았지만 안내하는 직원도 많고 유도도 잘 해주셔서
+                                    불편함 없이 잘 이용했네요
+                                </p>
+                                <p class="text-muted">Reviews (74)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Featured Product -->
+    </th:block>
+</th:block>
+
+
+
+
