@@ -20,7 +20,7 @@
       <td align="center"><a href="https://github.com/jgm0327"><img src="https://avatars.githubusercontent.com/u/100139942?v=4" width="100px;" alt=""/><br /><sub><b>팀원 : 장규민</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/ljkhyeong"><img src="https://avatars.githubusercontent.com/u/115821049?v=4" width="100px;" alt=""/><br /><sub><b>팀원 : 임정규</b></sub></a><br /></td>
      <tr/>
-      <td align="center"><a href="https://github.com/icj4153"><img src="https://avatars.githubusercontent.com/u/115138216?v=4" width="100px;" alt=""/><br /><sub><b>팀장 : 임창준</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/icj4153"><img src="https://avatars.githubusercontent.com/u/115138216?v=4" width="100px;" alt=""/><br /><sub><b>팀원 : 임창준</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/gayeonP"><img src="https://avatars.githubusercontent.com/u/62829894?v=4" width="100px;" alt=""/><br /><sub><b>팀원 : 박가연</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/Hwangseokjun97"><img src="https://avatars.githubusercontent.com/u/88317274?v=4" width="100px;" alt=""/><br /><sub><b>팀원 : 황석준</b></sub></a><br /></td>
     </tr>
